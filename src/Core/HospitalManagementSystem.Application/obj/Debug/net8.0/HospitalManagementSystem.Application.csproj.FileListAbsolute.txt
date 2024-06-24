@@ -1,0 +1,15 @@
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\bin\Debug\net8.0\HospitalManagementSystem.Application.deps.json
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\bin\Debug\net8.0\HospitalManagementSystem.Application.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\bin\Debug\net8.0\HospitalManagementSystem.Application.pdb
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\bin\Debug\net8.0\HospitalManagementSystem.Domain.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\bin\Debug\net8.0\HospitalManagementSystem.Domain.pdb
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\HospitalManagementSystem.Application.csproj.AssemblyReference.cache
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\HospitalManagementSystem.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\HospitalManagementSystem.Application.AssemblyInfoInputs.cache
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\HospitalManagementSystem.Application.AssemblyInfo.cs
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\HospitalManagementSystem.Application.csproj.CoreCompileInputs.cache
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\HospitalManagementSystem.Application.csproj.CopyComplete
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\HospitalManagementSystem.Application.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\refint\HospitalManagementSystem.Application.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\HospitalManagementSystem.Application.pdb
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\ref\HospitalManagementSystem.Application.dll
