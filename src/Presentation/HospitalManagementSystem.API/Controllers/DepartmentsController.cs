@@ -18,19 +18,37 @@ namespace HospitalManagementSystem.API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             return Ok(await _service.GetAllAsync());
         }
-        [HttpPost]
+
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetById(int id)
+        {
+            return Ok(await _service.GetByIdAsync(id));
+        }
+
+        [HttpPost("")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Post([FromForm]DepartmentCreateDto department)
         {
             await _service.CreateAsync(department);
             return StatusCode(StatusCodes.Status201Created);
         }
-        [HttpDelete]
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Put(int id, [FromForm]DepartmentUpdateDto dto)
+        {
+            if (id < 0) throw new ArgumentException("No associated department found!");
+            await _service.PutAsync(id, dto);
+            return(StatusCode(StatusCodes.Status204NoContent));
+        }
+
+        [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {

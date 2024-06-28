@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HospitalManagementSystem.Domain.Entities;
 
 namespace HospitalManagementSystem.Application.DTOs.Departments
 {
-    public record DepartmentItemDto(int Id,string Name);
+    public record DepartmentItemDto(int Id,string Name, ICollection<Doctor>? Doctors);
 }

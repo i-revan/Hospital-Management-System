@@ -15,3 +15,4 @@ C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Infra
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Infrastructure\HospitalManagementSystem.Infrastructure\bin\Debug\net8.0\HospitalManagementSystem.Application.pdb
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Infrastructure\HospitalManagementSystem.Infrastructure\bin\Debug\net8.0\HospitalManagementSystem.Domain.pdb
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Infrastructure\HospitalManagementSystem.Infrastructure\obj\Debug\net8.0\HospitalManagementSystem.Infrastructure.csproj.CopyComplete
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Infrastructure\HospitalManagementSystem.Infrastructure\obj\Debug\net8.0\HospitalManagementSystem.Infrastructure.sourcelink.json

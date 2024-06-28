@@ -13,3 +13,4 @@ C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\refint\HospitalManagementSystem.Application.dll
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\HospitalManagementSystem.Application.pdb
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\ref\HospitalManagementSystem.Application.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Application\obj\Debug\net8.0\HospitalManagementSystem.Application.sourcelink.json

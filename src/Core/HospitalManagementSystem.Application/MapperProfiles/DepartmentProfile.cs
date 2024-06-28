@@ -10,6 +10,7 @@ namespace HospitalManagementSystem.Application.MapperProfiles
         {
             CreateMap<Department, DepartmentItemDto>().ReverseMap();
             CreateMap<DepartmentCreateDto, Department>();
+            CreateMap<DepartmentUpdateDto, Department>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using HospitalManagementSystem.Application.Abstraction.Repositories;
+﻿using HospitalManagementSystem.Application;
+using HospitalManagementSystem.Application.Abstraction.Repositories;
 using HospitalManagementSystem.Application.Abstraction.Services;
 using HospitalManagementSystem.Domain.Entities.Identity;
 using HospitalManagementSystem.Persistence.Contexts;
@@ -33,6 +34,7 @@ namespace HospitalManagementSystem.Persistence.ServiceRegistration
             services.AddScoped<IDepartmentService,DepartmentService>();
 
             services.AddScoped<AppDbContextInitializer>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }

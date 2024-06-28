@@ -10,3 +10,4 @@ C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Domain\obj\Debug\net8.0\HospitalManagementSystem.Domain.pdb
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Domain\obj\Debug\net8.0\ref\HospitalManagementSystem.Domain.dll
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Domain\obj\Debug\net8.0\HospitalManagementSystem.Domain.csproj.AssemblyReference.cache
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Core\HospitalManagementSystem.Domain\obj\Debug\net8.0\HospitalManagementSystem.Domain.sourcelink.json

@@ -2,6 +2,7 @@
 using HospitalManagementSystem.Domain.Entities.Common;
 using HospitalManagementSystem.Domain.Entities.Identity;
 using HospitalManagementSystem.Persistence.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -10,9 +11,11 @@ namespace HospitalManagementSystem.Persistence.Contexts
 {
     public class AppDbContext:IdentityDbContext<AppUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
+        private readonly IHttpContextAccessor _accessor;
+
+        public AppDbContext(DbContextOptions<AppDbContext> options, IHttpContextAccessor accessor):base(options)
         {
-            
+            _accessor = accessor;
         }
 
         DbSet<Department> Departments { get; set; }
@@ -28,15 +31,18 @@ namespace HospitalManagementSystem.Persistence.Contexts
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entities = ChangeTracker.Entries<BaseEntity>();
+            var currentUser = _accessor.HttpContext?.User?.Identity?.Name ?? "System";
             foreach (var data in entities)
             {
                 switch (data.State)
                 {
                     case EntityState.Added:
-                        data.Entity.CreatedAt = DateTime.Now;
+                        data.Entity.CreatedAt = DateTime.UtcNow;
+                        data.Entity.CreatedBy = currentUser;
                         break;
                     case EntityState.Modified:
-                        data.Entity.UpdatedAt = DateTime.Now;
+                        data.Entity.UpdatedAt = DateTime.UtcNow;
+                        data.Entity.UpdatedBy = currentUser;
                         break;
                     default: break;
                 }

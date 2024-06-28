@@ -17,3 +17,4 @@ C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Infra
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Infrastructure\HospitalManagementSystem.Persistence\obj\Debug\net8.0\ref\HospitalManagementSystem.Persistence.dll
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Infrastructure\HospitalManagementSystem.Persistence\bin\Debug\net8.0\HospitalManagementSystem.Persistence.runtimeconfig.json
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Infrastructure\HospitalManagementSystem.Persistence\obj\Debug\net8.0\HospitalManagementSystem.Persistence.genruntimeconfig.cache
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Infrastructure\HospitalManagementSystem.Persistence\obj\Debug\net8.0\HospitalManagementSystem.Persistence.sourcelink.json

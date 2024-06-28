@@ -2,6 +2,7 @@
 using HospitalManagementSystem.Domain.Entities.Common;
 using HospitalManagementSystem.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq.Expressions;
 
 namespace HospitalManagementSystem.Persistence.Implementations.Repositories.Generic
@@ -54,6 +55,21 @@ namespace HospitalManagementSystem.Persistence.Implementations.Repositories.Gene
             return await query.FirstOrDefaultAsync();
         }
 
+        public async Task<bool> IsExistsAsync(Expression<Func<T, bool>> expression, params string[] includes)
+        {
+            var query = _table.AsQueryable();
+
+            if (includes != null && includes.Length > 0)
+            {
+                foreach (var item in includes)
+                {
+                    query = query.Include(item);
+                }
+            }
+
+            return await query.AnyAsync(expression);
+        }
+
         public async Task AddAsync(T entity)
         {
             await _table.AddAsync(entity);
@@ -77,11 +93,6 @@ namespace HospitalManagementSystem.Persistence.Implementations.Repositories.Gene
         public void ReverseDelete(T entity)
         {
             entity.IsDeleted = false;
-        }
-
-        public async Task SaveChangeAsync()
-        {
-            await _context.SaveChangesAsync();
         }
 
         private IQueryable<T> _addIncludes(IQueryable<T> query, params string[] includes)
