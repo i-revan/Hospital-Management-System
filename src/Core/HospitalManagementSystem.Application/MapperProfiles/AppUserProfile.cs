@@ -1,14 +1,10 @@
-﻿using AutoMapper;
-using HospitalManagementSystem.Application.DTOs.Users;
-using HospitalManagementSystem.Domain.Entities.Identity;
+﻿using HospitalManagementSystem.Domain.Entities.Identity;
 
-namespace HospitalManagementSystem.Application.MapperProfiles
+namespace HospitalManagementSystem.Application.MapperProfiles;
+internal class AppUserProfile : Profile
 {
-    internal class AppUserProfile:Profile
+    public AppUserProfile()
     {
-        public AppUserProfile()
-        {
-            CreateMap<RegisterDto, AppUser>();
-        }
+        CreateMap<RegisterDto, AppUser>();
     }
 }

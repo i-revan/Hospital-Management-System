@@ -1,0 +1,2 @@
+﻿namespace HospitalManagementSystem.Application.CQRS.Commands.Departments.UpdateDepartment;
+public record UpdateDepartmentCommandResponse:CommandResponse;

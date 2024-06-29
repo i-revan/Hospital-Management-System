@@ -1,10 +1,6 @@
-﻿
-
-namespace HospitalManagementSystem.Domain.Enums
+﻿namespace HospitalManagementSystem.Domain.Enums;
+public enum Role
 {
-    public enum Role
-    {
-        Admin,
-        Member
-    }
+    Admin,
+    Member
 }

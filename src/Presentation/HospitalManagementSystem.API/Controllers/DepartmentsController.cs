@@ -1,60 +1,64 @@
-﻿using HospitalManagementSystem.Application.Abstraction.Services;
-using HospitalManagementSystem.Application.DTOs.Departments;
+﻿using HospitalManagementSystem.Application.CQRS.Commands.Departments.CreateDepartment;
+using HospitalManagementSystem.Application.CQRS.Commands.Departments.DeleteDepartment;
+using HospitalManagementSystem.Application.CQRS.Commands.Departments.UpdateDepartment;
+using HospitalManagementSystem.Application.CQRS.Queries.Departments.GetAllDepartments;
+using HospitalManagementSystem.Application.CQRS.Queries.Departments.GetDepartmentById;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
-namespace HospitalManagementSystem.API.Controllers
+namespace HospitalManagementSystem.API.Controllers;
+[Route("[controller]")]
+[ApiController]
+[Authorize]
+public class DepartmentsController : ControllerBase
 {
-    [Route("[controller]")]
-    [ApiController]
-    [Authorize]
-    public class DepartmentsController : ControllerBase
+    private readonly IMediator _mediator;
+
+    public DepartmentsController(IDepartmentService service, IMediator mediator)
     {
-        private readonly IDepartmentService _service;
+        _mediator = mediator;
+    }
 
-        public DepartmentsController(IDepartmentService service)
-        {
-            _service = service;
-        }
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> Get([FromQuery] GetAllDepartmentsQueryRequest request) =>
+        Ok(await _mediator.Send(request));
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> Get()
+    [HttpGet("{id}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var response = await _mediator.Send(new GetDepartmentByIdRequest
         {
-            return Ok(await _service.GetAllAsync());
-        }
+            Id = id
+        });
+        return Ok(response.Department);
+    }
 
-        [HttpGet("{id}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetById(int id)
-        {
-            return Ok(await _service.GetByIdAsync(id));
-        }
+    [HttpPost("")]
+    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
 
-        [HttpPost("")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Post([FromForm]DepartmentCreateDto department)
-        {
-            await _service.CreateAsync(department);
-            return StatusCode(StatusCodes.Status201Created);
-        }
+    public async Task<IActionResult> Post([FromForm] CreateDepartmentCommandRequest department)
+    {
+        var response = await _mediator.Send(department);
+        return StatusCode((int)response.StatusCode, response);
+    }
 
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Put(int id, [FromForm]DepartmentUpdateDto dto)
-        {
-            if (id < 0) throw new ArgumentException("No associated department found!");
-            await _service.PutAsync(id, dto);
-            return(StatusCode(StatusCodes.Status204NoContent));
-        }
+    [HttpPut("")]
+    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
+    public async Task<IActionResult> Put([FromForm] UpdateDepartmentCommandRequest department)
+    {
+        var response = await _mediator.Send(department);
+        return StatusCode((int)(response.StatusCode), response);
+    }
 
-        [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            if (id <= 0) return StatusCode(StatusCodes.Status400BadRequest);
-            await _service.SoftDeleteAsync(id);
-            return StatusCode(StatusCodes.Status204NoContent);
-        }
+    [HttpDelete("")]
+    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
+    public async Task<IActionResult> Delete([FromForm] DeleteDepartmentCommandRequest request)
+    {
+        var response = await _mediator.Send(request);
+        return StatusCode((int)response.StatusCode, response);
     }
 }

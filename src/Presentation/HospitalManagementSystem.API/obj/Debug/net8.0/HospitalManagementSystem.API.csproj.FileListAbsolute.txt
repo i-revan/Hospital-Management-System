@@ -154,3 +154,6 @@ C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Prese
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\HospitalManagementSystem.Infrastructure.pdb
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Presentation\HospitalManagementSystem.API\obj\Debug\net8.0\HospitalManagementSystem.API.sourcelink.json
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\MediatR.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\MediatR.Contracts.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management Sysytem - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll

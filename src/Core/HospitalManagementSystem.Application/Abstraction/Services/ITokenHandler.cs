@@ -1,11 +1,8 @@
-﻿using HospitalManagementSystem.Application.DTOs.Users;
-using HospitalManagementSystem.Domain.Entities.Identity;
+﻿using HospitalManagementSystem.Domain.Entities.Identity;
 using System.Security.Claims;
 
-namespace HospitalManagementSystem.Application.Abstraction.Services
+namespace HospitalManagementSystem.Application.Abstraction.Services;
+public interface ITokenHandler
 {
-    public interface ITokenHandler
-    {
-        TokenResponseDto CreateJwt(AppUser user, IEnumerable<Claim>claims,int minutes);
-    }
+    TokenResponseDto CreateJwt(AppUser user, IEnumerable<Claim> claims, int minutes);
 }

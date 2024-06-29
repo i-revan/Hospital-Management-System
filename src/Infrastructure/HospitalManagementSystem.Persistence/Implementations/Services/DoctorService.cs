@@ -1,4 +1,5 @@
-﻿using HospitalManagementSystem.Application.Abstraction.Repositories;
+﻿using HospitalManagementSystem.Application;
+using HospitalManagementSystem.Application.Abstraction.Repositories;
 using HospitalManagementSystem.Application.Abstraction.Services;
 using HospitalManagementSystem.Application.DTOs.Doctors;
 using System;
@@ -11,11 +12,11 @@ namespace HospitalManagementSystem.Persistence.Implementations.Services
 {
     public class DoctorService : IDoctorService
     {
-        private readonly IDoctorRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DoctorService(IDoctorRepository repository)
+        public DoctorService(IUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
         public Task CreateAsync(DoctorCreateDto dto)
         {

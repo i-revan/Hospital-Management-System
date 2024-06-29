@@ -1,12 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
-
-namespace HospitalManagementSystem.API.Controllers
+﻿namespace HospitalManagementSystem.API.Controllers;
+[Route("api/[controller]")]
+[ApiController]
+public class DoctorsController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class DoctorsController : ControllerBase
-    {
 
-    }
 }

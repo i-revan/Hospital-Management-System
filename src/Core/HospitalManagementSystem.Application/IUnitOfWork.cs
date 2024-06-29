@@ -1,16 +1,14 @@
-﻿using HospitalManagementSystem.Application.Abstraction.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HospitalManagementSystem.Application.Abstraction.Repositories.Departments;
+using HospitalManagementSystem.Application.Abstraction.Repositories.Doctors;
 
 namespace HospitalManagementSystem.Application
 {
     public interface IUnitOfWork
     {
-        IDepartmentRepository DepartmentRepository { get; }
-        IDoctorRepository DoctorRepository { get; }
+        IDepartmentReadRepository DepartmentReadRepository { get; }
+        IDepartmentWriteRepository DepartmentWriteRepository { get; }
+        IDoctorReadRepository DoctorReadRepository { get; }
+        IDoctorWriteRepository DoctorWriteRepository { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken=default);
     }

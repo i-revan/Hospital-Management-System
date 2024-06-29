@@ -1,16 +1,15 @@
-﻿using AutoMapper;
-using HospitalManagementSystem.Application.DTOs.Departments;
-using HospitalManagementSystem.Domain.Entities;
+﻿using HospitalManagementSystem.Application.CQRS.Commands.Departments.CreateDepartment;
+using HospitalManagementSystem.Application.CQRS.Commands.Departments.UpdateDepartment;
 
-namespace HospitalManagementSystem.Application.MapperProfiles
+namespace HospitalManagementSystem.Application.MapperProfiles;
+internal class DepartmentProfile : Profile
 {
-    internal class DepartmentProfile:Profile
+    public DepartmentProfile()
     {
-        public DepartmentProfile()
-        {
-            CreateMap<Department, DepartmentItemDto>().ReverseMap();
-            CreateMap<DepartmentCreateDto, Department>();
-            CreateMap<DepartmentUpdateDto, Department>();
-        }
+        CreateMap<Department, DepartmentItemDto>().ReverseMap();
+        CreateMap<DepartmentCreateDto, Department>();
+        CreateMap<DepartmentUpdateDto, Department>();
+        CreateMap<CreateDepartmentCommandRequest, DepartmentCreateDto>().ReverseMap();
+        CreateMap<UpdateDepartmentCommandRequest, DepartmentUpdateDto>().ReverseMap();
     }
 }

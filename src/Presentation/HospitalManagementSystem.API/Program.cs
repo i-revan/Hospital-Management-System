@@ -2,8 +2,6 @@ using HospitalManagementSystem.Persistence.ServiceRegistration;
 using HospitalManagementSystem.Application.ServiceRegistration;
 using HospitalManagementSystem.Infrastructure.ServiceRegistration;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Identity;
-using HospitalManagementSystem.Domain.Enums;
 using HospitalManagementSystem.Persistence.Contexts;
 
 internal class Program
