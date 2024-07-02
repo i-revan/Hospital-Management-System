@@ -1,51 +1,74 @@
 ﻿using HospitalManagementSystem.Application;
-using HospitalManagementSystem.Application.Abstraction.Repositories;
 using HospitalManagementSystem.Application.Abstraction.Services;
 using HospitalManagementSystem.Application.DTOs.Doctors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HospitalManagementSystem.Persistence.Implementations.Services
+namespace HospitalManagementSystem.Persistence.Implementations.Services;
+public class DoctorService : IDoctorService
 {
-    public class DoctorService : IDoctorService
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public DoctorService(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        private readonly IUnitOfWork _unitOfWork;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public DoctorService(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-        public Task CreateAsync(DoctorCreateDto dto)
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<ICollection<DoctorItemDto>> GetAllAsync()
+    {
+        ICollection<Doctor> doctors = await _unitOfWork.DoctorReadRepository.GetAll(includes: "Department").ToListAsync();
+        return _mapper.Map<ICollection<DoctorItemDto>>(doctors);
+    }
 
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<DoctorItemDto> GetByIdAsync(string id)
+    {
+        ArgumentNullException.ThrowIfNull(id);
+        Doctor doctor = await _unitOfWork.DoctorReadRepository.GetByIdAsync(id,includes: "Department");
+        if (doctor is null) throw new Exception("No associated doctor found!");
+        return _mapper.Map<DoctorItemDto>(doctor);
+    }
 
-        public Task<ICollection<DoctorItemDto>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<bool> CreateDoctorAsync(DoctorCreateDto dto)
+    {
+        bool isExist = await _unitOfWork.DoctorReadRepository.IsExistsAsync(d => d.Name.ToLower().Trim() == dto.Name.ToLower().Trim() && !d.IsDeleted);
+        if (isExist) throw new Exception("This doctor already exists");
+        bool isDepartmentExist = await _unitOfWork.DepartmentReadRepository.IsExistsAsync(d => d.Id == dto.DepartmentId);
+        if (!isDepartmentExist) throw new Exception("Selected department does not exist!");
+        bool result = await _unitOfWork.DoctorWriteRepository.AddAsync(_mapper.Map<Doctor>(dto));
+        await _unitOfWork.SaveChangesAsync();
+        return result;
+    }
 
-        public Task<DoctorItemDto> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<bool> UpdateDoctorAsync(string id, DoctorUpdateDto dto)
+    {
+        ArgumentNullException.ThrowIfNull(id);
+        Doctor doctor = await _unitOfWork.DoctorReadRepository.GetByIdAsync(id);
+        if (doctor is null) throw new Exception("No associated doctor found!");
+        bool isExist = await _unitOfWork.DoctorReadRepository.IsExistsAsync(d => d.Name.ToLower().Trim() == dto.Name.ToLower().Trim() && !d.IsDeleted);
+        if (isExist) throw new Exception("This department already exists");
+        _mapper.Map(dto, doctor);
+        bool result = _unitOfWork.DoctorWriteRepository.Update(doctor);
+        await _unitOfWork.SaveChangesAsync();
+        return result;
+    }
 
-        public Task PutAsync(int id, DoctorUpdateDto dto)
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<bool> SoftDeleteDoctorAsync(string id)
+    {
+        ArgumentNullException.ThrowIfNull(id);
+        Doctor doctor = await _unitOfWork.DoctorReadRepository.GetByIdAsync(id, isTracking: true);
+        if (doctor is null) throw new Exception("No associated doctor found!");
+        bool result = _unitOfWork.DoctorWriteRepository.SoftDelete(doctor);
+        await _unitOfWork.SaveChangesAsync();
+        return result;
+    }
 
-        public Task SoftDeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<bool> DeleteDoctorAsync(string id)
+    {
+        ArgumentNullException.ThrowIfNull(id);
+        Doctor doctor = await _unitOfWork.DoctorReadRepository.GetByIdAsync(id);
+        if (doctor is null) throw new Exception("No associated doctor found!");
+        bool result = _unitOfWork.DoctorWriteRepository.Delete(doctor);
+        await _unitOfWork.SaveChangesAsync();
+        return result;
     }
 }

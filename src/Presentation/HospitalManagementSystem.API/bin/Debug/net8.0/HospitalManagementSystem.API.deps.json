@@ -12,6 +12,7 @@
           "HospitalManagementSystem.Infrastructure": "1.0.0",
           "HospitalManagementSystem.Persistence": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "8.0.4",
+          "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.19.5",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
@@ -723,6 +724,7 @@
           }
         }
       },
+      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.19.5": {},
       "Microsoft.Win32.SystemEvents/6.0.0": {
         "runtime": {
           "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
@@ -1434,6 +1436,13 @@
       "sha512": "sha512-N4KeF3cpcm1PUHym1RmakkzfkEv3GRMyofVv40uXsQhCQeglr2OHNcUk2WOG51AKpGO8ynGpo9M/kFXSzghwug==",
       "path": "microsoft.sqlserver.server/1.0.0",
       "hashPath": "microsoft.sqlserver.server.1.0.0.nupkg.sha512"
+    },
+    "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.19.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Kaa1rBZdJFq5A0qgAcl6Bmk/UqLXTq9acEqxUlPEBA8oscmakLfkvuSXfG7Wa9t1/keaT85EuuDNgOo+Z9VYOQ==",
+      "path": "microsoft.visualstudio.azure.containers.tools.targets/1.19.5",
+      "hashPath": "microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512"
     },
     "Microsoft.Win32.SystemEvents/6.0.0": {
       "type": "package",

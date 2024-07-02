@@ -3,7 +3,6 @@ using HospitalManagementSystem.Application.CQRS.Commands.Departments.DeleteDepar
 using HospitalManagementSystem.Application.CQRS.Commands.Departments.UpdateDepartment;
 using HospitalManagementSystem.Application.CQRS.Queries.Departments.GetAllDepartments;
 using HospitalManagementSystem.Application.CQRS.Queries.Departments.GetDepartmentById;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalManagementSystem.API.Controllers;
 [Route("[controller]")]
@@ -25,9 +24,9 @@ public class DepartmentsController : ControllerBase
 
     [HttpGet("{id}")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(string id)
     {
-        var response = await _mediator.Send(new GetDepartmentByIdRequest
+        var response = await _mediator.Send(new GetDepartmentByIdQueryRequest
         {
             Id = id
         });
@@ -36,8 +35,6 @@ public class DepartmentsController : ControllerBase
 
     [HttpPost("")]
     [Authorize(Roles = "Admin")]
-    [AllowAnonymous]
-
     public async Task<IActionResult> Post([FromForm] CreateDepartmentCommandRequest department)
     {
         var response = await _mediator.Send(department);
@@ -46,16 +43,14 @@ public class DepartmentsController : ControllerBase
 
     [HttpPut("")]
     [Authorize(Roles = "Admin")]
-    [AllowAnonymous]
     public async Task<IActionResult> Put([FromForm] UpdateDepartmentCommandRequest department)
     {
         var response = await _mediator.Send(department);
-        return StatusCode((int)(response.StatusCode), response);
+        return StatusCode((int)response.StatusCode, response);
     }
 
     [HttpDelete("")]
     [Authorize(Roles = "Admin")]
-    [AllowAnonymous]
     public async Task<IActionResult> Delete([FromForm] DeleteDepartmentCommandRequest request)
     {
         var response = await _mediator.Send(request);

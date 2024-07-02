@@ -5,7 +5,7 @@ public class Doctor : BaseNameEntity
     public string Address { get; set; } = null!;
     public string Phone { get; set; } = null!;
 
-    public int DepartmentId { get; set; }
+    public Guid DepartmentId { get; set; }
     public Department Department { get; set; } = null!;
 
 }

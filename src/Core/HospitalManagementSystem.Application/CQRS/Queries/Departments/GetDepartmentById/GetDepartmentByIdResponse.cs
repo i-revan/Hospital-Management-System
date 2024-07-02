@@ -1,2 +1,0 @@
-﻿namespace HospitalManagementSystem.Application.CQRS.Queries.Departments.GetDepartmentById;
-public record GetDepartmentByIdResponse(DepartmentItemDto Department);

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "e/VDFIVYBT+hh9aitgEqHrEHQAdW1Wa0nYBpxnbd4TgAPA0u8xi6ArUkwIsmIKIXytn7maOwebRDFktBUjZ6eQ==",
+  "dgSpecHash": "MeB7fkdG0U1PaaFqvXg1CSMDTzGKCw/Vcy4KiiTRunYIjZ5xCb5MUVfcU1hk6wc8QuCaIS6wmCAFmqm37rgFZg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rvani\\Desktop\\ConsoleApps\\Hospital Management Sysytem - Onion\\src\\Core\\HospitalManagementSystem.Domain\\HospitalManagementSystem.Domain.csproj",
+  "projectFilePath": "C:\\Users\\rvani\\Desktop\\ConsoleApps\\Hospital Management System - Onion\\src\\Core\\HospitalManagementSystem.Domain\\HospitalManagementSystem.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rvani\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.4\\microsoft.aspnetcore.cryptography.internal.8.0.4.nupkg.sha512",
     "C:\\Users\\rvani\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.4\\microsoft.aspnetcore.cryptography.keyderivation.8.0.4.nupkg.sha512",

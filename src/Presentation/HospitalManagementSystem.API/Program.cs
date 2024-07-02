@@ -3,6 +3,7 @@ using HospitalManagementSystem.Application.ServiceRegistration;
 using HospitalManagementSystem.Infrastructure.ServiceRegistration;
 using Microsoft.OpenApi.Models;
 using HospitalManagementSystem.Persistence.Contexts;
+using System.Text.Json.Serialization;
 
 internal class Program
 {
@@ -47,7 +48,7 @@ internal class Program
         builder.Services.AddApplicationServices();
         builder.Services.AddPersistenceServices(builder.Configuration);
         builder.Services.AddInfrastructureServices(builder.Configuration);
-        
+
 
 
         var app = builder.Build();

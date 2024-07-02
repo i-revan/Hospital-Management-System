@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eNH6cuwtPXdaOFwafIfy7C0eLW7ZQBhLuvZWz5ovudW+iO9mLK05JYVWYA15ikJaB53YI9mAqe8PW6yiHEBfJw==",
+  "dgSpecHash": "HboxWPlZg30K2iA0o32ndMuk4hTsWSXAVB/kitE9pVFi59cZVVAAP79UQLrGGmothQUDaOpDuZLZZAdKa0av1A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rvani\\Desktop\\ConsoleApps\\Hospital Management Sysytem - Onion\\src\\Core\\HospitalManagementSystem.Application\\HospitalManagementSystem.Application.csproj",
+  "projectFilePath": "C:\\Users\\rvani\\Desktop\\ConsoleApps\\Hospital Management System - Onion\\src\\Core\\HospitalManagementSystem.Application\\HospitalManagementSystem.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rvani\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\rvani\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",

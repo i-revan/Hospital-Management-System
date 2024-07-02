@@ -1,7 +1,7 @@
 ﻿namespace HospitalManagementSystem.Domain.Entities.Common;
 public abstract class BaseEntity
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     //Soft-delete
     public bool IsDeleted { get; set; }

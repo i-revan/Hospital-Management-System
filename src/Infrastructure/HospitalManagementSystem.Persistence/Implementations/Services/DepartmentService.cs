@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using HospitalManagementSystem.Application;
+﻿using HospitalManagementSystem.Application;
 using HospitalManagementSystem.Application.Abstraction.Services;
 using HospitalManagementSystem.Application.DTOs.Departments;
-using HospitalManagementSystem.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace HospitalManagementSystem.Persistence.Implementations.Services
 {
@@ -18,19 +15,18 @@ namespace HospitalManagementSystem.Persistence.Implementations.Services
             _mapper = mapper;
         }
 
-        public async Task<ICollection<DepartmentItemDto>> GetAllAsync()
+        public async Task<ICollection<AllDepartmentsDto>> GetAllAsync()
         {
-            ICollection<Department> departments = await _unitOfWork.DepartmentReadRepository.GetAllWhere().ToListAsync();
-            return _mapper.Map<ICollection<DepartmentItemDto>>(departments);
+            ICollection<Department> departments = await _unitOfWork.DepartmentReadRepository.GetAll(includes: "Doctors").ToListAsync();
+            return _mapper.Map<ICollection<AllDepartmentsDto>>(departments);
         }
 
-        public async Task<DepartmentItemDto> GetByIdAsync(int id)
+        public async Task<DepartmentItemDto> GetByIdAsync(string id)
         {
-            if (id < 0) throw new Exception("Given id is not correct!");
-            Department department = await _unitOfWork.DepartmentReadRepository.GetByIdAsync(id);
+            ArgumentNullException.ThrowIfNull(id);
+            Department department = await _unitOfWork.DepartmentReadRepository.GetByIdAsync(id, includes: "Doctors");
             if (department is null) throw new Exception("No associated department found!");
-            DepartmentItemDto dto =_mapper.Map<DepartmentItemDto>(department);
-            return dto;
+            return _mapper.Map<DepartmentItemDto>(department);
         }
 
         public async Task<bool> CreateDepartmentAsync(DepartmentCreateDto dto)
@@ -42,9 +38,9 @@ namespace HospitalManagementSystem.Persistence.Implementations.Services
             return result;
         }
 
-        public async Task<bool> UpdateDepartmentAsync(int id, DepartmentUpdateDto dto)
+        public async Task<bool> UpdateDepartmentAsync(string id, DepartmentUpdateDto dto)
         {
-            if (id < 0) throw new Exception("Given id is not correct!");
+            ArgumentNullException.ThrowIfNull(id);
             Department department = await _unitOfWork.DepartmentReadRepository.GetByIdAsync(id);
             if (department is null) throw new Exception("No associated department found!");
             bool isExist = await _unitOfWork.DepartmentReadRepository.IsExistsAsync(d => d.Name.ToLower().Trim() == dto.Name.ToLower().Trim() && !d.IsDeleted);
@@ -55,9 +51,9 @@ namespace HospitalManagementSystem.Persistence.Implementations.Services
             return result;
         }
 
-        public async Task<bool> SoftDeleteDepartmentAsync(int id)
+        public async Task<bool> SoftDeleteDepartmentAsync(string id)
         {
-            if (id <= 0) throw new Exception("Given id is not correct!");
+            ArgumentNullException.ThrowIfNull(id);
             Department department = await _unitOfWork.DepartmentReadRepository.GetByIdAsync(id, isTracking: true);
             if (department is null) throw new Exception("Not Found");
             bool result = _unitOfWork.DepartmentWriteRepository.SoftDelete(department);
@@ -65,9 +61,9 @@ namespace HospitalManagementSystem.Persistence.Implementations.Services
             return result;
         }
 
-        public async Task<bool> DeleteDepartmentAsync(int id)
+        public async Task<bool> DeleteDepartmentAsync(string id)
         {
-            if (id <= 0) throw new Exception("Given id is not correct!");
+            ArgumentNullException.ThrowIfNull(id);
             Department department = await _unitOfWork.DepartmentReadRepository.GetByIdAsync(id);
             if (department is null) throw new Exception("Not found");
             bool result = _unitOfWork.DepartmentWriteRepository.Delete(department);

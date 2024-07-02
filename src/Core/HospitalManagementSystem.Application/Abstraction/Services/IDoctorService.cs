@@ -1,12 +1,10 @@
-﻿using HospitalManagementSystem.Application.DTOs.Doctors;
-
-namespace HospitalManagementSystem.Application.Abstraction.Services;
+﻿namespace HospitalManagementSystem.Application.Abstraction.Services;
 public interface IDoctorService
 {
     Task<ICollection<DoctorItemDto>> GetAllAsync();
-    Task<DoctorItemDto> GetByIdAsync(int id);
-    Task CreateAsync(DoctorCreateDto dto);
-    Task PutAsync(int id, DoctorUpdateDto dto);
-    Task DeleteAsync(int id);
-    Task SoftDeleteAsync(int id);
+    Task<DoctorItemDto> GetByIdAsync(string id);
+    Task<bool> CreateDoctorAsync(DoctorCreateDto dto);
+    Task<bool> UpdateDoctorAsync(string id, DoctorUpdateDto dto);
+    Task<bool> DeleteDoctorAsync(string id);
+    Task<bool> SoftDeleteDoctorAsync(string id);
 }

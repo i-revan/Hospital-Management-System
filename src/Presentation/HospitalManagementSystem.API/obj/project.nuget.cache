@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2QZZfJ/951sXP9qktUSZHUvYWK8mC8ZJFOm6ZCVG9vP31AZ7jgwhmrVbwkB1ejreHRsmtdVcgm/XlHCt6k4tBw==",
+  "dgSpecHash": "hagwr8NzszMOVVqFsfBBYFugptVT4TdJcEPc1lo6UD3Jy7NTxEf1fJQ/0RlttkmVIiSflb9k9WczGKItK2WZXg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rvani\\Desktop\\ConsoleApps\\Hospital Management Sysytem - Onion\\src\\Presentation\\HospitalManagementSystem.API\\HospitalManagementSystem.API.csproj",
+  "projectFilePath": "C:\\Users\\rvani\\Desktop\\ConsoleApps\\Hospital Management System - Onion\\src\\Presentation\\HospitalManagementSystem.API\\HospitalManagementSystem.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rvani\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\rvani\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
@@ -55,6 +55,7 @@
     "C:\\Users\\rvani\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.6.2\\microsoft.identitymodel.tokens.7.6.2.nupkg.sha512",
     "C:\\Users\\rvani\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\rvani\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
+    "C:\\Users\\rvani\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
     "C:\\Users\\rvani\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\rvani\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\rvani\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",

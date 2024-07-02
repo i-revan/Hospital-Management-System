@@ -1,3 +1,3 @@
 ﻿namespace HospitalManagementSystem.Application.CQRS.Commands.Departments.UpdateDepartment;
-public record UpdateDepartmentCommandRequest(int Id, string Name) : IRequest<UpdateDepartmentCommandResponse>;
+public record UpdateDepartmentCommandRequest(string Id, string Name) : IRequest<UpdateDepartmentCommandResponse>;
 

@@ -4,5 +4,5 @@ public record DoctorCreateDto(
     string Surname,
     string Address,
     string Phone,
-    int DepartmentId
+    Guid DepartmentId
     );
