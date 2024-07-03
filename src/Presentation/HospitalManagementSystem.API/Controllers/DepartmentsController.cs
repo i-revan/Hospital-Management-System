@@ -12,7 +12,7 @@ public class DepartmentsController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public DepartmentsController(IDepartmentService service, IMediator mediator)
+    public DepartmentsController(IMediator mediator)
     {
         _mediator = mediator;
     }
