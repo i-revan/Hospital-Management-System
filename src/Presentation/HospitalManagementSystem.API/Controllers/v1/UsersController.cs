@@ -1,7 +1,9 @@
-﻿using HospitalManagementSystem.Application.DTOs.Users;
+﻿using Asp.Versioning;
+using HospitalManagementSystem.Application.DTOs.Users;
 
-namespace HospitalManagementSystem.API.Controllers;
-[Route("[controller]")]
+namespace HospitalManagementSystem.API.Controllers.v1;
+[ApiVersion("1.0")]
+[Route("v{version:apiVersion}/[controller]")]
 [ApiController]
 public class UsersController : ControllerBase
 {
@@ -25,6 +27,6 @@ public class UsersController : ControllerBase
     [HttpPost("[Action]")]
     public async Task<IActionResult> LoginByRefresh(string refreshToken)
     {
-        return (Ok(await _service.LoginByRefreshToken(refreshToken)));
+        return Ok(await _service.LoginByRefreshToken(refreshToken));
     }
 }

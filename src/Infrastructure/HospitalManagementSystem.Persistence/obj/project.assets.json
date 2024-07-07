@@ -4543,7 +4543,8 @@
       "HospitalManagementSystem.Application >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 8.0.4",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.4",
-      "Microsoft.EntityFrameworkCore.Tools >= 8.0.4"
+      "Microsoft.EntityFrameworkCore.Tools >= 8.0.4",
+      "Microsoft.Extensions.Caching.Memory >= 8.0.0"
     ]
   },
   "packageFolders": {
@@ -4607,6 +4608,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[8.0.4, )"
+          },
+          "Microsoft.Extensions.Caching.Memory": {
+            "target": "Package",
+            "version": "[8.0.0, )"
           }
         },
         "imports": [

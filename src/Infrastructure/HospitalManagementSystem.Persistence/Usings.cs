@@ -8,6 +8,10 @@ global using HospitalManagementSystem.Persistence.Contexts;
 global using HospitalManagementSystem.Persistence.Implementations.Repositories.Generic;
 global using HospitalManagementSystem.Application.Abstraction.Repositories.Doctors;
 global using AutoMapper;
+global using HospitalManagementSystem.Application;
+global using HospitalManagementSystem.Application.Abstraction.Services;
+global using HospitalManagementSystem.Application.DTOs.Departments;
+
 
 
 

@@ -3,7 +3,7 @@ using HospitalManagementSystem.Application.ServiceRegistration;
 using HospitalManagementSystem.Infrastructure.ServiceRegistration;
 using Microsoft.OpenApi.Models;
 using HospitalManagementSystem.Persistence.Contexts;
-using System.Text.Json.Serialization;
+using Serilog;
 
 internal class Program
 {
@@ -14,7 +14,16 @@ internal class Program
         // Add services to the container.
 
         builder.Services.AddControllers();
-
+        builder.Services.AddApiVersioning(options =>
+        {
+            options.DefaultApiVersion = new ApiVersion(1);
+            options.ReportApiVersions = true;
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.ApiVersionReader = new UrlSegmentApiVersionReader();
+        }).AddApiExplorer(options => {
+            options.GroupNameFormat = "'v'V";
+            options.SubstituteApiVersionInUrl = true;
+        });
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(opt =>
@@ -45,11 +54,13 @@ internal class Program
         }
     });
         });
+
         builder.Services.AddApplicationServices();
         builder.Services.AddPersistenceServices(builder.Configuration);
         builder.Services.AddInfrastructureServices(builder.Configuration);
 
-
+        builder.Host.UseSerilog((context, configuration) =>
+            configuration.ReadFrom.Configuration(context.Configuration));
 
         var app = builder.Build();
 
@@ -59,6 +70,8 @@ internal class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
+        app.UseSerilogRequestLogging();
 
         using (var scope = app.Services.CreateScope())
         {

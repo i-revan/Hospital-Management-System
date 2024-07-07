@@ -4,8 +4,9 @@ using HospitalManagementSystem.Application.CQRS.Commands.Departments.UpdateDepar
 using HospitalManagementSystem.Application.CQRS.Queries.Departments.GetAllDepartments;
 using HospitalManagementSystem.Application.CQRS.Queries.Departments.GetDepartmentById;
 
-namespace HospitalManagementSystem.API.Controllers;
-[Route("[controller]")]
+namespace HospitalManagementSystem.API.Controllers.v1;
+[ApiVersion("1")]
+[Route("v{version:apiVersion}/[controller]")]
 [ApiController]
 [Authorize]
 public class DepartmentsController : ControllerBase

@@ -1,7 +1,4 @@
-﻿using HospitalManagementSystem.Application;
-using HospitalManagementSystem.Application.Abstraction.Services;
-using HospitalManagementSystem.Persistence.Implementations.Repositories.Departments;
-using HospitalManagementSystem.Persistence.Implementations.Repositories.Doctors;
+﻿using HospitalManagementSystem.Persistence.Implementations.Repositories.Departments;
 using HospitalManagementSystem.Persistence.Implementations.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +21,9 @@ public static class ServiceRegistration
             opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
             opt.Lockout.AllowedForNewUsers = true;
         }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
+
+        services.AddMemoryCache();
+        services.AddSingleton<ICacheService, MemoryCacheService>();
 
         services.AddScoped<IAuthService, AuthService>();
 

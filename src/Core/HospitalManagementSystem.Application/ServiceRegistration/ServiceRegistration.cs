@@ -1,4 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
+using HospitalManagementSystem.Application.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -12,6 +13,8 @@ public static class ServiceRegistration
 
         services.AddAutoMapper(assembly);
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
+        services.AddScoped(typeof(IPipelineBehavior<,>),
+            typeof(LoggingPipelineBehavior<,>));
 
         services.AddFluentValidationAutoValidation()
             .AddFluentValidationClientsideAdapters()

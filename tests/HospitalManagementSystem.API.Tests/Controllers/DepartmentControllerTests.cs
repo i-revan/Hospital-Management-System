@@ -1,3 +1,4 @@
+using HospitalManagementSystem.API.Controllers.v1;
 using HospitalManagementSystem.Application.CQRS.Commands.Departments.CreateDepartment;
 using HospitalManagementSystem.Application.CQRS.Commands.Departments.DeleteDepartment;
 using HospitalManagementSystem.Application.CQRS.Commands.Departments.UpdateDepartment;
@@ -35,7 +36,7 @@ public class DepartmentControllerTests
         var okResult = result as OkObjectResult;
         okResult.Should().NotBeNull();
         okResult?.StatusCode.Should().Be(200);
-        var returnDepartments = okResult.Value as GetAllDepartmentsQueryResponse;
+        var returnDepartments = okResult?.Value as GetAllDepartmentsQueryResponse;
         returnDepartments.Should().NotBeNull();
         returnDepartments?.Departments.Should().HaveCount(2);
     }

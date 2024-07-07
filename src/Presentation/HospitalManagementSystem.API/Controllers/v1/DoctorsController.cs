@@ -1,11 +1,13 @@
-﻿using HospitalManagementSystem.Application.CQRS.Commands.Doctors.CreateDoctor;
+﻿using Asp.Versioning;
+using HospitalManagementSystem.Application.CQRS.Commands.Doctors.CreateDoctor;
 using HospitalManagementSystem.Application.CQRS.Commands.Doctors.DeleteDoctor;
 using HospitalManagementSystem.Application.CQRS.Commands.Doctors.UpdateDoctor;
 using HospitalManagementSystem.Application.CQRS.Queries.Doctors.GetAllDoctors;
 using HospitalManagementSystem.Application.CQRS.Queries.Doctors.GetDepartmentById;
 
-namespace HospitalManagementSystem.API.Controllers;
-[Route("[controller]")]
+namespace HospitalManagementSystem.API.Controllers.v1;
+[ApiVersion("1.0")]
+[Route("v{version:apiVersion}/[controller]")]
 [ApiController]
 [Authorize]
 public class DoctorsController : ControllerBase
@@ -51,6 +53,6 @@ public class DoctorsController : ControllerBase
     public async Task<IActionResult> Delete([FromForm] DeleteDoctorCommandRequest request)
     {
         var response = await _mediator.Send(request);
-        return StatusCode((int) response.StatusCode, response);
+        return StatusCode((int)response.StatusCode, response);
     }
 }

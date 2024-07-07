@@ -316,3 +316,16 @@ C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presen
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\obj\Debug\net8.0\HospitalManagementSystem.API.pdb
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\obj\Debug\net8.0\HospitalManagementSystem.API.genruntimeconfig.cache
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\obj\Debug\net8.0\ref\HospitalManagementSystem.API.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Asp.Versioning.Abstractions.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Asp.Versioning.Http.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Asp.Versioning.Mvc.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Asp.Versioning.Mvc.ApiExplorer.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Serilog.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Serilog.AspNetCore.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Serilog.Sinks.File.dll
