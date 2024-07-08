@@ -15,7 +15,7 @@ public class UpdateDoctorCommandHandler : IRequestHandler<UpdateDoctorCommandReq
         bool result = await _doctorService.UpdateDoctorAsync(request.Id,doctorDto);
         return new UpdateDoctorCommandResponse
         {
-            StatusCode = result ? System.Net.HttpStatusCode.OK : System.Net.HttpStatusCode.BadRequest,
+            StatusCode = result ? HttpStatusCode.OK : System.Net.HttpStatusCode.BadRequest,
             Message = result ? "Doctor is successfully updated!" : "Error occured"
         };
     }

@@ -15,7 +15,7 @@ public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCo
         bool result = await _departmentService.CreateDepartmentAsync(departmentDto);
         return new CreateDepartmentCommandResponse
         {
-            StatusCode = result ? System.Net.HttpStatusCode.Created : System.Net.HttpStatusCode.BadRequest,
+            StatusCode = result ? HttpStatusCode.Created : HttpStatusCode.BadRequest,
             Message = result ? "Department is successfully created!" : "Error occured"
         };
     }

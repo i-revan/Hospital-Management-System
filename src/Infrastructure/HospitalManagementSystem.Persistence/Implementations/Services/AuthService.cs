@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using HospitalManagementSystem.Application.Abstraction.Services;
-using HospitalManagementSystem.Application.DTOs.Users;
+﻿using HospitalManagementSystem.Application.DTOs.Users;
 using HospitalManagementSystem.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
@@ -57,7 +55,7 @@ public class AuthService : IAuthService
 
     private async Task<TokenResponseDto> _createTokenDto(AppUser user, ICollection<Claim> userClaims)
     {
-        TokenResponseDto tokenDto = _handler.CreateJwt(user, userClaims, 1);
+        TokenResponseDto tokenDto = _handler.CreateJwt(user, userClaims, 60);
         user.RefreshToken = tokenDto.RefreshToken;
         user.RefreshTokenExpiredAt = tokenDto.RefreshTokenExpiredAt;
         await _userManager.UpdateAsync(user);

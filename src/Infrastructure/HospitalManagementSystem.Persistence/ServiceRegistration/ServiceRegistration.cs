@@ -32,6 +32,8 @@ public static class ServiceRegistration
 
         services.AddScoped<IDoctorService, DoctorService>();
 
+        services.AddScoped<IAppointmentService, AppointmentService>();
+
         services.AddScoped<AppDbContextInitializer>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;

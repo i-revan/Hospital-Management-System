@@ -13,8 +13,9 @@ public class AppDbContext : IdentityDbContext<AppUser>
         _accessor = accessor;
     }
 
-    DbSet<Department> Departments { get; set; }
-    DbSet<Doctor> Doctors { get; set; }
+    public DbSet<Department> Departments { get; set; }
+    public DbSet<Doctor> Doctors { get; set; }
+    public DbSet<Appointment> Appointments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -15,7 +15,7 @@ public class UpdateDepartmentCommandHandler : IRequestHandler<UpdateDepartmentCo
         bool result = await _departmentService.UpdateDepartmentAsync(request.Id, departmentDto);
         return new UpdateDepartmentCommandResponse
         {
-            StatusCode = result ? System.Net.HttpStatusCode.OK : System.Net.HttpStatusCode.BadRequest,
+            StatusCode = result ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
             Message = result ? "Department is successfully updated!" : "Error occured"
         };
     }

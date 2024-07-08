@@ -31,7 +31,7 @@ public class TokenHandler : ITokenHandler
             user.UserName,
             token.ValidTo,
             CreateRefreshToken(),
-            token.ValidTo.AddMinutes(1));
+            token.ValidTo.AddMinutes(minutes/4));
     }
 
     public string CreateRefreshToken()

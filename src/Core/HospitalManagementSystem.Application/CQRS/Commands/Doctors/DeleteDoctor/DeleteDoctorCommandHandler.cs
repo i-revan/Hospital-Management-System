@@ -1,5 +1,4 @@
-﻿using System.Net;
-namespace HospitalManagementSystem.Application.CQRS.Commands.Doctors.DeleteDoctor;
+﻿namespace HospitalManagementSystem.Application.CQRS.Commands.Doctors.DeleteDoctor;
 
 public class DeleteDoctorCommandHandler : IRequestHandler<DeleteDoctorCommandRequest, DeleteDoctorCommandResponse>
 {

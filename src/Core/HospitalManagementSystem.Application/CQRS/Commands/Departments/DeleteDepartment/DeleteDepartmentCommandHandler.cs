@@ -1,5 +1,4 @@
-﻿using System.Net;
-namespace HospitalManagementSystem.Application.CQRS.Commands.Departments.DeleteDepartment;
+﻿namespace HospitalManagementSystem.Application.CQRS.Commands.Departments.DeleteDepartment;
 public class DeleteDepartmentCommandHandler : IRequestHandler<DeleteDepartmentCommandRequest, DeleteDepartmentCommandResponse>
 {
     private readonly IDepartmentService _departmentService;

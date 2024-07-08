@@ -63,7 +63,6 @@ public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity, new()
                 query = query.Include(item);
             }
         }
-
         return await query.AnyAsync(expression);
     }
 

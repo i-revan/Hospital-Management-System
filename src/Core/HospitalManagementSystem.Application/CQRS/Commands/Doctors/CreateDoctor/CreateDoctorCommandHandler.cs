@@ -16,7 +16,7 @@ public class CreateDoctorCommandHandler : IRequestHandler<CreateDoctorCommandReq
         bool result = await _doctorService.CreateDoctorAsync(doctorDto);
         return new CreateDoctorCommandResponse
         {
-            StatusCode = result ? System.Net.HttpStatusCode.Created : System.Net.HttpStatusCode.BadRequest,
+            StatusCode = result ? HttpStatusCode.Created : HttpStatusCode.BadRequest,
             Message = result ? "Doctor is successfully created!" : "Error occured"
         };
     }

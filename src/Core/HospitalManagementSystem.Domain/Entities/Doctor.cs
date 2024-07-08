@@ -1,4 +1,6 @@
-﻿namespace HospitalManagementSystem.Domain.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace HospitalManagementSystem.Domain.Entities;
 public class Doctor : BaseNameEntity
 {
     public string Surname { get; set; } = null!;
@@ -7,5 +9,8 @@ public class Doctor : BaseNameEntity
 
     public Guid DepartmentId { get; set; }
     public Department Department { get; set; } = null!;
+
+    [JsonIgnore]
+    public ICollection<Appointment>? Appointments { get; set; }
 
 }
