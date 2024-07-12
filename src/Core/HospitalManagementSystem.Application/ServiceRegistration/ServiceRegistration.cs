@@ -1,5 +1,6 @@
 ﻿using FluentValidation.AspNetCore;
 using HospitalManagementSystem.Application.Behaviors;
+using HospitalManagementSystem.Application.Stripe;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -19,6 +20,7 @@ public static class ServiceRegistration
         services.AddFluentValidationAutoValidation()
             .AddFluentValidationClientsideAdapters()
             .AddValidatorsFromAssembly(assembly);
+
         return services;
     }
 }

@@ -828,6 +828,14 @@
           }
         }
       },
+      "Newtonsoft.Json/12.0.3": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.3.23909"
+          }
+        }
+      },
       "Serilog/4.0.0": {
         "runtime": {
           "lib/net8.0/Serilog.dll": {
@@ -937,6 +945,18 @@
           "lib/net8.0/Serilog.Sinks.File.dll": {
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.0.0"
+          }
+        }
+      },
+      "Stripe.net/45.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "System.Configuration.ConfigurationManager": "6.0.1"
+        },
+        "runtime": {
+          "lib/net6.0/Stripe.net.dll": {
+            "assemblyVersion": "45.2.0.0",
+            "fileVersion": "45.2.0.0"
           }
         }
       },
@@ -1240,6 +1260,7 @@
           "HospitalManagementSystem.Application": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",
           "Microsoft.IdentityModel.Tokens": "7.6.2",
+          "Stripe.net": "45.2.0",
           "System.IdentityModel.Tokens.Jwt": "7.6.2"
         },
         "runtime": {
@@ -1699,6 +1720,13 @@
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
     },
+    "Newtonsoft.Json/12.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
     "Serilog/4.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1761,6 +1789,13 @@
       "sha512": "sha512-lxjg89Y8gJMmFxVkbZ+qDgjl+T4yC5F7WSLTvA+5q0R04tfKVLRL/EHpYoJ/MEQd2EeCKDuylBIVnAYMotmh2A==",
       "path": "serilog.sinks.file/6.0.0",
       "hashPath": "serilog.sinks.file.6.0.0.nupkg.sha512"
+    },
+    "Stripe.net/45.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aOo3TymQv6yRMrqszfXvN7UR2w17DAAzTp2UY5O7eQckUw5070Js/Zli0xer+5xK8qLE7OKYMVTZnAV2h0GRvw==",
+      "path": "stripe.net/45.2.0",
+      "hashPath": "stripe.net.45.2.0.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.4.0": {
       "type": "package",

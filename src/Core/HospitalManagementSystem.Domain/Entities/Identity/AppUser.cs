@@ -10,4 +10,5 @@ public class AppUser : IdentityUser
     public DateTime? RefreshTokenExpiredAt { get; set; }
 
     public ICollection<Appointment>? Appointments { get; set; }
+    public ICollection<Billing>? Billings { get; set; }
 }

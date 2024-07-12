@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text;
+using HospitalManagementSystem.Application.Stripe;
+using HospitalManagementSystem.Application.Abstraction.Services.Stripe;
+using HospitalManagementSystem.Infrastructure.Implementations.Services;
 
 namespace HospitalManagementSystem.Infrastructure.ServiceRegistration;
 public static class ServiceRegistration
@@ -29,6 +32,10 @@ public static class ServiceRegistration
             };
         });
         services.AddAuthorization();
+
+        services.Configure<StripeSettings>(configuration.GetSection("Stripe"));
+        services.AddScoped<IStripeService, StripeService>();
+        services.AddScoped<IPaymentService, PaymentService>();
         return services;
     }
 }

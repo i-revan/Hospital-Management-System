@@ -187,3 +187,4 @@ C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\tests\Hosp
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\tests\HospitalManagementSystem.API.Tests\bin\Debug\net8.0\Serilog.Sinks.Console.dll
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\tests\HospitalManagementSystem.API.Tests\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\tests\HospitalManagementSystem.API.Tests\bin\Debug\net8.0\Serilog.Sinks.File.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\tests\HospitalManagementSystem.API.Tests\bin\Debug\net8.0\Stripe.net.dll

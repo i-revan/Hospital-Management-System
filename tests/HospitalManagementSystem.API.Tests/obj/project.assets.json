@@ -1460,6 +1460,23 @@
           }
         }
       },
+      "Stripe.net/45.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "System.Configuration.ConfigurationManager": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Stripe.net.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Stripe.net.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/6.4.0": {
         "type": "package",
         "dependencies": {
@@ -2121,6 +2138,7 @@
           "HospitalManagementSystem.Application": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",
           "Microsoft.IdentityModel.Tokens": "7.6.2",
+          "Stripe.net": "45.2.0",
           "System.IdentityModel.Tokens.Jwt": "7.6.2"
         },
         "compile": {
@@ -4358,6 +4376,30 @@
         "serilog-sink-nuget.png",
         "serilog.sinks.file.6.0.0.nupkg.sha512",
         "serilog.sinks.file.nuspec"
+      ]
+    },
+    "Stripe.net/45.2.0": {
+      "sha512": "aOo3TymQv6yRMrqszfXvN7UR2w17DAAzTp2UY5O7eQckUw5070Js/Zli0xer+5xK8qLE7OKYMVTZnAV2h0GRvw==",
+      "type": "package",
+      "path": "stripe.net/45.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "icon.png",
+        "lib/net461/Stripe.net.dll",
+        "lib/net461/Stripe.net.xml",
+        "lib/net5.0/Stripe.net.dll",
+        "lib/net5.0/Stripe.net.xml",
+        "lib/net6.0/Stripe.net.dll",
+        "lib/net6.0/Stripe.net.xml",
+        "lib/netcoreapp3.1/Stripe.net.dll",
+        "lib/netcoreapp3.1/Stripe.net.xml",
+        "lib/netstandard2.0/Stripe.net.dll",
+        "lib/netstandard2.0/Stripe.net.xml",
+        "stripe.net.45.2.0.nupkg.sha512",
+        "stripe.net.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/6.4.0": {

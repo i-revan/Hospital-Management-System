@@ -78,6 +78,65 @@ namespace HospitalManagementSystem.Persistence.Contexts.Migrations
                     b.ToTable("Appointments");
                 });
 
+            modelBuilder.Entity("HospitalManagementSystem.Domain.Entities.Billing", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("AppointmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ClientSecret")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PaymentIntentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("AppointmentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Billings");
+                });
+
             modelBuilder.Entity("HospitalManagementSystem.Domain.Entities.Department", b =>
                 {
                     b.Property<Guid>("Id")
@@ -404,6 +463,29 @@ namespace HospitalManagementSystem.Persistence.Contexts.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("HospitalManagementSystem.Domain.Entities.Billing", b =>
+                {
+                    b.HasOne("HospitalManagementSystem.Domain.Entities.Identity.AppUser", null)
+                        .WithMany("Billings")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("HospitalManagementSystem.Domain.Entities.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HospitalManagementSystem.Domain.Entities.Identity.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("HospitalManagementSystem.Domain.Entities.Doctor", b =>
                 {
                     b.HasOne("HospitalManagementSystem.Domain.Entities.Department", "Department")
@@ -479,6 +561,8 @@ namespace HospitalManagementSystem.Persistence.Contexts.Migrations
             modelBuilder.Entity("HospitalManagementSystem.Domain.Entities.Identity.AppUser", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("Billings");
                 });
 #pragma warning restore 612, 618
         }

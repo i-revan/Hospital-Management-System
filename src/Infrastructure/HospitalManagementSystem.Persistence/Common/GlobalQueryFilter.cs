@@ -10,5 +10,6 @@ internal static class GlobalQueryFilter
         modelBuilder.ApplyFilter<Department>();
         modelBuilder.ApplyFilter<Doctor>();
         modelBuilder.ApplyFilter<Appointment>();
+        modelBuilder.ApplyFilter<Billing>();
     }
 }

@@ -1,5 +1,7 @@
 ﻿using HospitalManagementSystem.Application.Abstraction.Repositories.Appointments;
+using HospitalManagementSystem.Application.Abstraction.Repositories.Billings;
 using HospitalManagementSystem.Persistence.Implementations.Repositories.Appointments;
+using HospitalManagementSystem.Persistence.Implementations.Repositories.Billings;
 using HospitalManagementSystem.Persistence.Implementations.Repositories.Departments;
 using HospitalManagementSystem.Persistence.Implementations.Repositories.Doctors;
 
@@ -15,7 +17,10 @@ public class UnitOfWork : IUnitOfWork
     private IDoctorWriteRepository? _doctorWriteRepository;
 
     private IAppointmentReadRepository? _appointmentReadRepository;
-    private IAppointmentWriteRepository? _appointmentWriteRepository;   
+    private IAppointmentWriteRepository? _appointmentWriteRepository; 
+    
+    private IBillingReadRepository? _billingReadRepository;
+    private IBillingWriteRepository? _billingWriteRepository;
 
     public UnitOfWork(AppDbContext context)
     {
@@ -30,6 +35,9 @@ public class UnitOfWork : IUnitOfWork
 
     public IAppointmentReadRepository AppointmentReadRepository => _appointmentReadRepository = _appointmentReadRepository ?? new AppointmentReadRepository(_context);
     public IAppointmentWriteRepository AppointmentWriteRepository => _appointmentWriteRepository = _appointmentWriteRepository ?? new AppointmentWriteRepository(_context);
+
+    public IBillingReadRepository BillingReadRepository => _billingReadRepository = _billingReadRepository ?? new BillingReadRepository(_context);
+    public IBillingWriteRepository BillingWriteRepository => _billingWriteRepository = _billingWriteRepository ?? new BillingWriteRepository(_context);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);
