@@ -1,5 +1,4 @@
-﻿
-using HospitalManagementSystem.Application;
+﻿using HospitalManagementSystem.Application;
 using HospitalManagementSystem.Application.Abstraction.Services.Stripe;
 using HospitalManagementSystem.Application.Stripe;
 using HospitalManagementSystem.Domain.Entities;
@@ -17,15 +16,17 @@ public class StripeService : IStripeService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly UserManager<AppUser> _userManager;
+    private readonly IEmailService _emailService;
 
     public StripeService(IOptions<StripeSettings> stripeSettings, IUnitOfWork unitOfWork, 
-        IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager)
+        IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager, IEmailService emailService)
     {
         _stripeSettings = stripeSettings.Value;
         StripeConfiguration.ApiKey = _stripeSettings.SecretKey;
         _unitOfWork = unitOfWork;
         _httpContextAccessor = httpContextAccessor;
         _userManager = userManager;
+        _emailService = emailService;
     }
     public async Task<string> CreatePaymentIntentAsync(decimal amount, string currency, Guid appointmentId)
     {
@@ -54,8 +55,16 @@ public class StripeService : IStripeService
             ClientSecret = paymentIntent.ClientSecret
         };
 
+
         await _unitOfWork.BillingWriteRepository.AddAsync(billing);
         await _unitOfWork.SaveChangesAsync();
+
+        Appointment appointment = await _unitOfWork.AppointmentReadRepository.GetByIdAsync(appointmentId.ToString(),
+            includes:"Doctor");
+        var body = $"Your appointment with Dr. {appointment.Doctor.Name} {appointment.Doctor.Surname} has been scheduled" +
+            $" for {appointment.StartTime}." +
+            $"Your payment for this appointment has been processed successfully.";
+        await _emailService.SendEmailAsync(user.Email, "Appointment Payment", body);
 
         return paymentIntent.ClientSecret;
     }

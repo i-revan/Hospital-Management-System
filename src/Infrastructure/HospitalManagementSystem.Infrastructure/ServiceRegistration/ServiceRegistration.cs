@@ -5,6 +5,7 @@ using System.Text;
 using HospitalManagementSystem.Application.Stripe;
 using HospitalManagementSystem.Application.Abstraction.Services.Stripe;
 using HospitalManagementSystem.Infrastructure.Implementations.Services;
+using HospitalManagementSystem.Application.Email;
 
 namespace HospitalManagementSystem.Infrastructure.ServiceRegistration;
 public static class ServiceRegistration
@@ -36,6 +37,9 @@ public static class ServiceRegistration
         services.Configure<StripeSettings>(configuration.GetSection("Stripe"));
         services.AddScoped<IStripeService, StripeService>();
         services.AddScoped<IPaymentService, PaymentService>();
+
+        services.Configure<EmailSettings>(configuration.GetSection("Email"));
+        services.AddScoped<IEmailService, EmailService>();
         return services;
     }
 }

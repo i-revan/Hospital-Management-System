@@ -5,4 +5,5 @@ public record RegisterDto(
     string Password,
     string ConfirmPassword,
     string Name,
-    string Surname);
+    string Surname
+    );

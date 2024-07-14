@@ -1,5 +1,6 @@
-﻿using Asp.Versioning;
-using HospitalManagementSystem.Application.DTOs.Users;
+﻿using HospitalManagementSystem.Application.CQRS.Commands.AppUsers.LoginByRefresh;
+using HospitalManagementSystem.Application.CQRS.Commands.AppUsers.LoginUser;
+using HospitalManagementSystem.Application.CQRS.Commands.AppUsers.RegisterUser;
 
 namespace HospitalManagementSystem.API.Controllers.v1;
 [ApiVersion("1.0")]
@@ -7,26 +8,26 @@ namespace HospitalManagementSystem.API.Controllers.v1;
 [ApiController]
 public class UsersController : ControllerBase
 {
-    private readonly IAuthService _service;
+    private readonly IMediator _mediator;
 
-    public UsersController(IAuthService service)
+    public UsersController(IMediator mediator)
     {
-        _service = service;
+        _mediator = mediator;
     }
     [HttpPost("[Action]")]
-    public async Task<IActionResult> Register([FromForm] RegisterDto dto)
+    public async Task<IActionResult> Register([FromForm] RegisterUserCommandRequest request)
     {
-        await _service.Register(dto);
-        return StatusCode(StatusCodes.Status201Created);
+        var response = await _mediator.Send(request);
+        return StatusCode((int) response.StatusCode, response);
     }
     [HttpPost("[Action]")]
-    public async Task<IActionResult> Login([FromForm] LoginDto dto)
+    public async Task<IActionResult> Login([FromForm] LoginUserCommandRequest request)
     {
-        return StatusCode(StatusCodes.Status200OK, await _service.Login(dto));
+        return StatusCode(StatusCodes.Status200OK, await _mediator.Send(request));
     }
     [HttpPost("[Action]")]
-    public async Task<IActionResult> LoginByRefresh(string refreshToken)
+    public async Task<IActionResult> LoginByRefresh([FromForm] LoginByRefreshCommandRequest request)
     {
-        return Ok(await _service.LoginByRefreshToken(refreshToken));
+        return Ok(await _mediator.Send(request));
     }
 }

@@ -331,3 +331,6 @@ C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presen
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Serilog.Sinks.File.dll
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\Stripe.net.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\MailKit.dll
+C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion\src\Presentation\HospitalManagementSystem.API\bin\Debug\net8.0\MimeKit.dll

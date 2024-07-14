@@ -18,7 +18,7 @@ public class AuthService : IAuthService
         _handler = handler;
     }
 
-    public async Task Register(RegisterDto registerDto)
+    public async Task<RegisterUserResponseDto> Register(RegisterDto registerDto)
     {
         if (await _userManager.Users.AnyAsync(u => u.UserName == registerDto.UserName || u.Email == registerDto.Email))
         {
@@ -36,6 +36,7 @@ public class AuthService : IAuthService
             throw new Exception(sb.ToString());
         }
         await _userManager.AddToRoleAsync(user, Role.Member.ToString());
+        return new(true, "User is successfully created!");
     }
 
 
@@ -49,6 +50,16 @@ public class AuthService : IAuthService
         }
         if (!await _userManager.CheckPasswordAsync(user, loginDto.Password)) throw new Exception("Username/Email or password is incorrect");
         await _userManager.GetRolesAsync(user);
+        TokenResponseDto tokenDto = await _createTokenDto(user, await _createClaims(user));
+        return tokenDto;
+    }
+
+
+    public async Task<TokenResponseDto> LoginByRefreshToken(string refresh)
+    {
+        AppUser user = await _userManager.Users.FirstOrDefaultAsync(u => u.RefreshToken == refresh);
+        if (user is null) throw new Exception("User not found!");
+        if (user.RefreshTokenExpiredAt < DateTime.UtcNow) throw new Exception("Your token expired");
         TokenResponseDto tokenDto = await _createTokenDto(user, await _createClaims(user));
         return tokenDto;
     }
@@ -78,14 +89,5 @@ public class AuthService : IAuthService
         }
 
         return userClaims;
-    }
-
-    public async Task<TokenResponseDto> LoginByRefreshToken(string refresh)
-    {
-        AppUser user = await _userManager.Users.FirstOrDefaultAsync(u => u.RefreshToken == refresh);
-        if (user is null) throw new Exception("User not found!");
-        if (user.RefreshTokenExpiredAt < DateTime.UtcNow) throw new Exception("Your token expired");
-        TokenResponseDto tokenDto = await _createTokenDto(user, await _createClaims(user));
-        return tokenDto;
     }
 }
