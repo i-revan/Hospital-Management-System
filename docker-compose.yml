@@ -23,6 +23,10 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=password@12345#
+    volumes:
+      - dbdata:/var/opt/mssql
+volumes:
+  dbdata:
 
 
     
