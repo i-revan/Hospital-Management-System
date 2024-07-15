@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalManagementSystem.AP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalManagementsSystem.Application.Tests", "tests\HospitalManagementsSystem.Application.Tests\HospitalManagementsSystem.Application.Tests.csproj", "{251443ED-10C7-4799-9AC5-947E8F795A38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagementSystem.API.Tests", "tests\HospitalManagementSystem.API.Tests\HospitalManagementSystem.API.Tests.csproj", "{02B2A0B3-B431-4FD4-8FC1-F4EDF12316AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalManagementSystem.API.Tests", "tests\HospitalManagementSystem.API.Tests\HospitalManagementSystem.API.Tests.csproj", "{02B2A0B3-B431-4FD4-8FC1-F4EDF12316AF}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{04B80EAA-9295-43B1-8F2C-20D433B7DFB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{02B2A0B3-B431-4FD4-8FC1-F4EDF12316AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02B2A0B3-B431-4FD4-8FC1-F4EDF12316AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02B2A0B3-B431-4FD4-8FC1-F4EDF12316AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04B80EAA-9295-43B1-8F2C-20D433B7DFB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04B80EAA-9295-43B1-8F2C-20D433B7DFB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04B80EAA-9295-43B1-8F2C-20D433B7DFB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04B80EAA-9295-43B1-8F2C-20D433B7DFB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

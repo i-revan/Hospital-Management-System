@@ -1,0 +1,56 @@
+name: dockercompose11994048194327328931
+services:
+  hospitalmanagementsystem.api:
+    build:
+      context: C:\Users\rvani\Desktop\ConsoleApps\Hospital Management System - Onion
+      dockerfile: src/Presentation/HospitalManagementSystem.API/Dockerfile
+    depends_on:
+      hospitalmanagementsystem.database:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "5000"
+      ASPNETCORE_HTTPS_PORTS: "5001"
+      ConnectionStrings__DefaultConnection: Server=hospitalmanagementsystem.database,1433;Database=HospitalManagement;User=sa;Password=password@12345#;TrustServerCertificate=True;Encrypt=False;
+    image: hospitalmanagementsystemapi
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 5000
+        published: "5000"
+        protocol: tcp
+      - mode: ingress
+        target: 5001
+        published: "5001"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\rvani\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\rvani\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  hospitalmanagementsystem.database:
+    container_name: hospitalmanagementsystem.database
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: password@12345#
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1433"
+        protocol: tcp
+networks:
+  default:
+    name: dockercompose11994048194327328931_default

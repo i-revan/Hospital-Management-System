@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  hospitalmanagementsystem.api:
+    image: ${DOCKER_REGISTRY-}hospitalmanagementsystemapi
+    build:
+      context: .
+      dockerfile: src/Presentation/HospitalManagementSystem.API/Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    depends_on:
+      - hospitalmanagementsystem.database
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=hospitalmanagementsystem.database,1433;Database=HospitalManagement;User=sa;Password=password@12345#;TrustServerCertificate=True;Encrypt=False;
+   
+  hospitalmanagementsystem.database:
+    container_name: hospitalmanagementsystem.database
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=password@12345#
+
+
+    
