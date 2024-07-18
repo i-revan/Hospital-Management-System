@@ -4,6 +4,7 @@ using HospitalManagementSystem.Infrastructure.ServiceRegistration;
 using Microsoft.OpenApi.Models;
 using HospitalManagementSystem.Persistence.Contexts;
 using Serilog;
+using HospitalManagementSystem.Quartz.ServiceRegistration;
 
 internal class Program
 {
@@ -58,6 +59,7 @@ internal class Program
         builder.Services.AddApplicationServices();
         builder.Services.AddPersistenceServices(builder.Configuration);
         builder.Services.AddInfrastructureServices(builder.Configuration);
+        builder.Services.AddQuartzServices();
 
         builder.Host.UseSerilog((context, configuration) =>
             configuration.ReadFrom.Configuration(context.Configuration));

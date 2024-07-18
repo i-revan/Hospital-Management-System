@@ -30,6 +30,7 @@
     <ProjectReference Include="..\..\Core\HospitalManagementSystem.Application\HospitalManagementSystem.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\HospitalManagementSystem.Infrastructure\HospitalManagementSystem.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\HospitalManagementSystem.Persistence\HospitalManagementSystem.Persistence.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\HospitalManagementSystem.Quartz\HospitalManagementSystem.Quartz.csproj" />
   </ItemGroup>
 
 </Project>

@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalManagementSystem.AP
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{04B80EAA-9295-43B1-8F2C-20D433B7DFB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagementSystem.Quartz", "src\Infrastructure\HospitalManagementSystem.Quartz\HospitalManagementSystem.Quartz.csproj", "{EE216C9F-55EF-445C-A393-904E144E6EE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{04B80EAA-9295-43B1-8F2C-20D433B7DFB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04B80EAA-9295-43B1-8F2C-20D433B7DFB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04B80EAA-9295-43B1-8F2C-20D433B7DFB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE216C9F-55EF-445C-A393-904E144E6EE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE216C9F-55EF-445C-A393-904E144E6EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE216C9F-55EF-445C-A393-904E144E6EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE216C9F-55EF-445C-A393-904E144E6EE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{BFAC02C7-79BA-4BBA-9BFE-7F2C682C6CDF} = {F071D09C-B107-49E6-A716-DB71443A97E0}
 		{251443ED-10C7-4799-9AC5-947E8F795A38} = {39C395D5-BE9F-4E51-9376-F596717202E3}
 		{02B2A0B3-B431-4FD4-8FC1-F4EDF12316AF} = {39C395D5-BE9F-4E51-9376-F596717202E3}
+		{EE216C9F-55EF-445C-A393-904E144E6EE4} = {A88B5AC9-DE1E-4219-9795-DD4592029E27}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D92120A5-CE06-4768-9E88-A242F9BDF978}
