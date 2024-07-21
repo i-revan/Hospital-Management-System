@@ -1,4 +1,4 @@
-﻿using HospitalManagementSystem.Application.Email;
+﻿using HospitalManagementSystem.Application.Common.Email;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;

@@ -1,4 +1,6 @@
 ﻿using HospitalManagementSystem.Application.Abstraction.Services;
+using HospitalManagementSystem.Application.Common.Errors;
+using HospitalManagementSystem.Application.Common.Results;
 using HospitalManagementSystem.Application.CQRS.Commands.Departments.CreateDepartment;
 using HospitalManagementSystem.Application.DTOs.Departments;
 namespace HospitalManagementsSystem.Application.Tests.CQRS.Commands;
@@ -24,7 +26,7 @@ public class CreateDepartmentCommandHandlerTests
         var departmentDto = new DepartmentCreateDto (request.Name);
 
         _mapperMock.Setup(m => m.Map<DepartmentCreateDto>(request)).Returns(departmentDto);
-        _departmentService.Setup(ds => ds.CreateDepartmentAsync(departmentDto)).ReturnsAsync(true);
+        _departmentService.Setup(ds => ds.CreateDepartmentAsync(departmentDto)).ReturnsAsync(Result<bool>.Success(true));
 
         //Act
         var result = await _handler.Handle(request, It.IsAny<CancellationToken>());
@@ -41,7 +43,8 @@ public class CreateDepartmentCommandHandlerTests
         var departmentDto = new DepartmentCreateDto(request.Name);
 
         _mapperMock.Setup(m => m.Map<DepartmentCreateDto>(request)).Returns(departmentDto);
-        _departmentService.Setup(ds => ds.CreateDepartmentAsync(departmentDto)).ReturnsAsync(false);
+        _departmentService.Setup(ds => ds.CreateDepartmentAsync(departmentDto))
+            .ReturnsAsync(Result<bool>.Failure(DepartmentErrors.DepartmentUpdatingFailed));
 
         // Act
         var response = await _handler.Handle(request, It.IsAny<CancellationToken>());
@@ -58,7 +61,8 @@ public class CreateDepartmentCommandHandlerTests
         var departmentDto = new DepartmentCreateDto(request.Name);
 
         _mapperMock.Setup(m => m.Map<DepartmentCreateDto>(request)).Returns(departmentDto);
-        _departmentService.Setup(ds => ds.CreateDepartmentAsync(departmentDto)).ReturnsAsync(false);
+        _departmentService.Setup(ds => ds.CreateDepartmentAsync(departmentDto))
+            .ReturnsAsync(Result<bool>.Success(true));
 
         // Act
         await _handler.Handle(request, It.IsAny<CancellationToken>());

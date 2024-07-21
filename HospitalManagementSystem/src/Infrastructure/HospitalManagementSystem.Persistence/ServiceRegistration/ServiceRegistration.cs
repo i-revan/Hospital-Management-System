@@ -22,9 +22,6 @@ public static class ServiceRegistration
             opt.Lockout.AllowedForNewUsers = true;
         }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
 
-        services.AddMemoryCache();
-        services.AddSingleton<ICacheService, MemoryCacheService>();
-
         services.AddScoped<IAuthService, AuthService>();
 
         services.AddScoped<IDepartmentReadRepository, DepartmentReadRepository>();

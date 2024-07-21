@@ -9,11 +9,11 @@ public class DeleteDoctorCommandHandler : IRequestHandler<DeleteDoctorCommandReq
     }
     public async Task<DeleteDoctorCommandResponse> Handle(DeleteDoctorCommandRequest request, CancellationToken cancellationToken)
     {
-        bool result = await _doctorService.SoftDeleteDoctorAsync(request.Id);
+        var result = await _doctorService.SoftDeleteDoctorAsync(request.Id);
         return new DeleteDoctorCommandResponse
         {
-            StatusCode = result ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
-            Message = result ? "Doctor is successfully deleted" : "Error occured"
+            StatusCode = result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
+            Message = result.IsSuccess ? "Doctor is successfully deleted" : result.Error.Description
         };
     }
 }

@@ -4,6 +4,6 @@ public record DoctorUpdateDto(
     string Surname,
     string Address,
     string Phone,
-    string DepartmentId
+    Guid DepartmentId
     );
 

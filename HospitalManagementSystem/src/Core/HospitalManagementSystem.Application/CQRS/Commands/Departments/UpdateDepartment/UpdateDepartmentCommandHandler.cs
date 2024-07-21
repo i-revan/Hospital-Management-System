@@ -12,11 +12,11 @@ public class UpdateDepartmentCommandHandler : IRequestHandler<UpdateDepartmentCo
     public async Task<UpdateDepartmentCommandResponse> Handle(UpdateDepartmentCommandRequest request, CancellationToken cancellationToken)
     {
         var departmentDto = _mapper.Map<DepartmentUpdateDto>(request);
-        bool result = await _departmentService.UpdateDepartmentAsync(request.Id, departmentDto);
+        var result = await _departmentService.UpdateDepartmentAsync(request.Id, departmentDto);
         return new UpdateDepartmentCommandResponse
         {
-            StatusCode = result ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
-            Message = result ? "Department is successfully updated!" : "Error occured"
+            StatusCode = result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
+            Message = result.IsSuccess ? "Department is successfully updated!" : result.Error.Description
         };
     }
 }

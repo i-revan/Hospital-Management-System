@@ -1,7 +1,7 @@
 ﻿namespace HospitalManagementSystem.Application.Abstraction.Services;
 public interface IAuthService
 {
-    Task<RegisterUserResponseDto> Register(RegisterDto registerDto);
-    Task<TokenResponseDto> Login(LoginDto loginDto);
-    Task<TokenResponseDto> LoginByRefreshToken(string refresh);
+    Task<Result<RegisterUserResponseDto>> Register(RegisterDto registerDto);
+    Task<Result<TokenResponseDto>> Login(LoginDto loginDto);
+    Task<Result<TokenResponseDto>> LoginByRefreshToken(string refresh);
 }

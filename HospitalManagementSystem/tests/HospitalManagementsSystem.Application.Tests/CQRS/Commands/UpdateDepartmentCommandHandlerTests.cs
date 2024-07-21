@@ -1,4 +1,5 @@
 ﻿using HospitalManagementSystem.Application.Abstraction.Services;
+using HospitalManagementSystem.Application.Common.Errors;
 using HospitalManagementSystem.Application.CQRS.Commands.Departments.UpdateDepartment;
 using HospitalManagementSystem.Application.DTOs.Departments;
 
@@ -24,7 +25,8 @@ public class UpdateDepartmentCommandHandlerTests
         var departmentDto = new DepartmentUpdateDto(request.Name);
 
         _mapperMock.Setup(m=>m.Map<DepartmentUpdateDto>(request)).Returns(departmentDto);
-        _departmentService.Setup(ds => ds.UpdateDepartmentAsync(request.Id,departmentDto)).ReturnsAsync(true);
+        _departmentService.Setup(ds => ds.UpdateDepartmentAsync(request.Id,departmentDto))
+            .ReturnsAsync(Result<bool>.Success(true));
 
         var response = await _handler.Handle(request, It.IsAny<CancellationToken>());
 
@@ -38,7 +40,8 @@ public class UpdateDepartmentCommandHandlerTests
         var departmentDto = new DepartmentUpdateDto(request.Name);
 
         _mapperMock.Setup(m => m.Map<DepartmentUpdateDto>(request)).Returns(departmentDto);
-        _departmentService.Setup(ds => ds.UpdateDepartmentAsync(request.Id, departmentDto)).ReturnsAsync(false);
+        _departmentService.Setup(ds => ds.UpdateDepartmentAsync(request.Id, departmentDto))
+            .ReturnsAsync(Result<bool>.Failure(DepartmentErrors.DepartmentUpdatingFailed));
 
         var response = await _handler.Handle(request, It.IsAny<CancellationToken>());
 
@@ -52,7 +55,8 @@ public class UpdateDepartmentCommandHandlerTests
         var departmentDto = new DepartmentUpdateDto(request.Name);
 
         _mapperMock.Setup(m => m.Map<DepartmentUpdateDto>(request)).Returns(departmentDto);
-        _departmentService.Setup(ds => ds.UpdateDepartmentAsync(request.Id, departmentDto)).ReturnsAsync(true);
+        _departmentService.Setup(ds => ds.UpdateDepartmentAsync(request.Id, departmentDto))
+            .ReturnsAsync(Result<bool>.Success(true));
 
         await _handler.Handle(request, It.IsAny<CancellationToken>());
 

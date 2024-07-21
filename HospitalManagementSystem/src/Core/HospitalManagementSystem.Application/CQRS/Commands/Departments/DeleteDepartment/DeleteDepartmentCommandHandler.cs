@@ -9,11 +9,11 @@ public class DeleteDepartmentCommandHandler : IRequestHandler<DeleteDepartmentCo
     }
     public async Task<DeleteDepartmentCommandResponse> Handle(DeleteDepartmentCommandRequest request, CancellationToken cancellationToken)
     {
-        bool result = await _departmentService.SoftDeleteDepartmentAsync(request.Id);
+        var result = await _departmentService.SoftDeleteDepartmentAsync(request.Id);
         return new DeleteDepartmentCommandResponse
         {
-            StatusCode = result ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
-            Message = result ? "Department is successfully deleted" : "Error occured"
+            StatusCode = result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
+            Message = result.IsSuccess ? "Department is successfully deleted" : result.Error.Description
         };
     }
 }

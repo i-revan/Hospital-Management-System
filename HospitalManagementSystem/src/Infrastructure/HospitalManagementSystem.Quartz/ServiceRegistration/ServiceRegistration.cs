@@ -11,7 +11,6 @@ public static class ServiceRegistration
         {
             q.UseMicrosoftDependencyInjectionJobFactory();
 
-            // Configure the job and trigger
             var jobKey = new JobKey("CompleteAppointmentJob");
 
             q.AddJob<CompleteAppointmentJob>(opts => opts.WithIdentity(jobKey));
@@ -19,7 +18,7 @@ public static class ServiceRegistration
             q.AddTrigger(opts => opts
                 .ForJob(jobKey)
                 .WithIdentity("CompleteAppointmentJob-trigger")
-                .WithCronSchedule("0 0/1 * * * ?")); // Every minute
+                .WithCronSchedule("0 0/1 * * * ?"));
         });
 
         services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);

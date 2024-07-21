@@ -28,7 +28,8 @@ public class DoctorsController : ControllerBase
     public async Task<IActionResult> GetById(string id)
     {
         var response = await _mediator.Send(new GetDoctorByIdQueryRequest(Id: id));
-        return Ok(response.Doctor);
+        if(response.IsFailure) return NotFound(new { response.Error.Code, response.Error.Description });
+        return Ok(response.Value.Doctor);
     }
 
     [HttpPost("")]

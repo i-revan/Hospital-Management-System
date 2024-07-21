@@ -1,6 +1,7 @@
 ﻿using HospitalManagementSystem.Application.CQRS.Commands.AppUsers.LoginByRefresh;
 using HospitalManagementSystem.Application.CQRS.Commands.AppUsers.LoginUser;
 using HospitalManagementSystem.Application.CQRS.Commands.AppUsers.RegisterUser;
+using System.Net;
 
 namespace HospitalManagementSystem.API.Controllers.v1;
 [ApiVersion("1.0")]
@@ -23,11 +24,15 @@ public class UsersController : ControllerBase
     [HttpPost("[Action]")]
     public async Task<IActionResult> Login([FromForm] LoginUserCommandRequest request)
     {
-        return StatusCode(StatusCodes.Status200OK, await _mediator.Send(request));
+        var response = await _mediator.Send(request);
+        if (response.IsSuccess) return StatusCode(StatusCodes.Status200OK, response.Value);
+        return StatusCode((int) HttpStatusCode.BadRequest, response.Error);
     }
     [HttpPost("[Action]")]
     public async Task<IActionResult> LoginByRefresh([FromForm] LoginByRefreshCommandRequest request)
     {
-        return Ok(await _mediator.Send(request));
+        var response = await _mediator.Send(request);
+        if (response.IsSuccess) return StatusCode(StatusCodes.Status200OK, response?.Value);
+        return StatusCode((int)HttpStatusCode.BadRequest, response.Error);
     }
 }

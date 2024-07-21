@@ -1,4 +1,5 @@
 using HospitalManagementSystem.API.Controllers.v1;
+using HospitalManagementSystem.Application.Common.Results;
 using HospitalManagementSystem.Application.CQRS.Commands.Departments.CreateDepartment;
 using HospitalManagementSystem.Application.CQRS.Commands.Departments.DeleteDepartment;
 using HospitalManagementSystem.Application.CQRS.Commands.Departments.UpdateDepartment;
@@ -62,7 +63,7 @@ public class DepartmentControllerTests
             Id = departmentId.ToString(),
         };
         _mediatorMock.Setup(m => m.Send(It.IsAny<GetDepartmentByIdQueryRequest>(), default))
-                         .ReturnsAsync(department);
+                         .ReturnsAsync(Result<GetDepartmentByIdQueryResponse>.Success(department));
 
         //Act
         var result = await _departmentsController.GetById(departmentId.ToString());

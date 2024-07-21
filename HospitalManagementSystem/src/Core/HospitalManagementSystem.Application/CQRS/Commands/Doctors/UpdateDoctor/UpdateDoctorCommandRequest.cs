@@ -5,5 +5,5 @@ public record UpdateDoctorCommandRequest(
     string Surname,
     string Address,
     string Phone,
-    string DepartmentId
+    Guid DepartmentId
     ):IRequest<UpdateDoctorCommandResponse>;

@@ -18,7 +18,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommandReq
         return new()
         {
             StatusCode = result.IsSuccess ? HttpStatusCode.Created : HttpStatusCode.BadRequest,
-            Message = result.IsSuccess ? result.Message : "Something went wrong"
+            Message = result.IsSuccess ? result.Value.Message : result.Error.Description
         };
     }
 }

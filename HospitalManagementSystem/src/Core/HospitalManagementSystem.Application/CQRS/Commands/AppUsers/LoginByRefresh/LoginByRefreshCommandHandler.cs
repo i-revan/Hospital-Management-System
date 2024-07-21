@@ -1,5 +1,6 @@
 ﻿namespace HospitalManagementSystem.Application.CQRS.Commands.AppUsers.LoginByRefresh;
-public class LoginByRefreshCommandHandler : IRequestHandler<LoginByRefreshCommandRequest, LoginByRefreshCommandResponse>
+public class LoginByRefreshCommandHandler : IRequestHandler<LoginByRefreshCommandRequest, 
+    Result<LoginByRefreshCommandResponse>>
 {
     private readonly IAuthService _authService;
     private readonly IMapper _mapper;
@@ -9,10 +10,11 @@ public class LoginByRefreshCommandHandler : IRequestHandler<LoginByRefreshComman
         _authService = authService;
         _mapper = mapper;
     }
-    public async Task<LoginByRefreshCommandResponse> Handle(LoginByRefreshCommandRequest request, CancellationToken cancellationToken)
+    public async Task<Result<LoginByRefreshCommandResponse>> Handle(LoginByRefreshCommandRequest request, CancellationToken cancellationToken)
     {
-        TokenResponseDto tokenResponseDto = await _authService.LoginByRefreshToken(request.RefreshToken);
-        var response = _mapper.Map<LoginByRefreshCommandResponse>(tokenResponseDto);
-        return response;
+        var result = await _authService.LoginByRefreshToken(request.RefreshToken);
+        if (result.IsFailure) return Result<LoginByRefreshCommandResponse>.Failure(result.Error);
+        var response = _mapper.Map<LoginByRefreshCommandResponse>(result.Value);
+        return Result<LoginByRefreshCommandResponse>.Success(response);
     }
 }

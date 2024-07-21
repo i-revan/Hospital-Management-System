@@ -13,11 +13,11 @@ public class CreateDoctorCommandHandler : IRequestHandler<CreateDoctorCommandReq
     public async Task<CreateDoctorCommandResponse> Handle(CreateDoctorCommandRequest request, CancellationToken cancellationToken)
     {
         var doctorDto = _mapper.Map<DoctorCreateDto>(request);
-        bool result = await _doctorService.CreateDoctorAsync(doctorDto);
+        var result = await _doctorService.CreateDoctorAsync(doctorDto);
         return new CreateDoctorCommandResponse
         {
-            StatusCode = result ? HttpStatusCode.Created : HttpStatusCode.BadRequest,
-            Message = result ? "Doctor is successfully created!" : "Error occured"
+            StatusCode = result.IsSuccess ? HttpStatusCode.Created : HttpStatusCode.BadRequest,
+            Message = result.IsSuccess ? "Doctor is successfully created!" : result.Error.Description
         };
     }
 }

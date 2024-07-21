@@ -11,6 +11,8 @@ global using AutoMapper;
 global using HospitalManagementSystem.Application;
 global using HospitalManagementSystem.Application.Abstraction.Services;
 global using HospitalManagementSystem.Application.DTOs.Departments;
+global using HospitalManagementSystem.Application.Common.Results;
+
 
 
 

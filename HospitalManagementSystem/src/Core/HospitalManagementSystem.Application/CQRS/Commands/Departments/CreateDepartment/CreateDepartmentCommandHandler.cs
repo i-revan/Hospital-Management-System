@@ -12,11 +12,11 @@ public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCo
     public async Task<CreateDepartmentCommandResponse> Handle(CreateDepartmentCommandRequest request, CancellationToken cancellationToken)
     {
         var departmentDto = _mapper.Map<DepartmentCreateDto>(request);
-        bool result = await _departmentService.CreateDepartmentAsync(departmentDto);
+        var result = await _departmentService.CreateDepartmentAsync(departmentDto);
         return new CreateDepartmentCommandResponse
         {
-            StatusCode = result ? HttpStatusCode.Created : HttpStatusCode.BadRequest,
-            Message = result ? "Department is successfully created!" : "Error occured"
+            StatusCode = result.IsSuccess ? HttpStatusCode.Created : HttpStatusCode.BadRequest,
+            Message = result.IsSuccess ? "Department is successfully created!" : result.Error.Description
         };
     }
 }

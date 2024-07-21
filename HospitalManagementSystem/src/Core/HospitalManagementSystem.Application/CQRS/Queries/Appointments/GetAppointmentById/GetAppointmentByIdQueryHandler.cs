@@ -1,5 +1,10 @@
-﻿namespace HospitalManagementSystem.Application.CQRS.Queries.Appointments.GetAppointmentById;
-public class GetAppointmentByIdQueryHandler : IRequestHandler<GetAppointmentByIdQueryRequest, GetAppointmentByIdQueryResponse>
+﻿using HospitalManagementSystem.Application.Abstraction.Services;
+using HospitalManagementSystem.Application.CQRS.Queries.Departments.GetDepartmentById;
+using HospitalManagementSystem.Domain.Entities;
+
+namespace HospitalManagementSystem.Application.CQRS.Queries.Appointments.GetAppointmentById;
+public class GetAppointmentByIdQueryHandler : IRequestHandler<GetAppointmentByIdQueryRequest, 
+    Result<GetAppointmentByIdQueryResponse>>
 {
     private readonly IAppointmentService _appointmentService;
     private readonly IMapper _mapper;
@@ -9,9 +14,12 @@ public class GetAppointmentByIdQueryHandler : IRequestHandler<GetAppointmentById
         _appointmentService = appointmentService;
         _mapper = mapper;
     }
-    public async Task<GetAppointmentByIdQueryResponse> Handle(GetAppointmentByIdQueryRequest request, CancellationToken cancellationToken)
+    public async Task<Result<GetAppointmentByIdQueryResponse>> Handle(GetAppointmentByIdQueryRequest request, CancellationToken cancellationToken)
     {
-        var appointment = await _appointmentService.GetByIdAsync(request.Id);
-        return _mapper.Map<GetAppointmentByIdQueryResponse>(appointment);
+        var appointmentResult = await _appointmentService.GetByIdAsync(request.Id);
+        if (appointmentResult.IsFailure) 
+            return Result<GetAppointmentByIdQueryResponse>.Failure(appointmentResult.Error);
+        var response = _mapper.Map<GetAppointmentByIdQueryResponse>(appointmentResult.Value);
+        return Result<GetAppointmentByIdQueryResponse>.Success(response);
     }
 }

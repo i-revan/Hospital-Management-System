@@ -1,4 +1,5 @@
-﻿using HospitalManagementSystem.Application.DTOs.Users;
+﻿using HospitalManagementSystem.Application.Common.Errors;
+using HospitalManagementSystem.Application.DTOs.Users;
 using HospitalManagementSystem.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
@@ -18,11 +19,11 @@ public class AuthService : IAuthService
         _handler = handler;
     }
 
-    public async Task<RegisterUserResponseDto> Register(RegisterDto registerDto)
+    public async Task<Result<RegisterUserResponseDto>> Register(RegisterDto registerDto)
     {
         if (await _userManager.Users.AnyAsync(u => u.UserName == registerDto.UserName || u.Email == registerDto.Email))
         {
-            throw new Exception("The user with this username or email already exists");
+            return UserErrors.UserAlreadyExist;
         }
         AppUser user = _mapper.Map<AppUser>(registerDto);
         IdentityResult result = await _userManager.CreateAsync(user, registerDto.Password);
@@ -33,35 +34,35 @@ public class AuthService : IAuthService
             {
                 sb.AppendLine(error.Description);
             }
-            throw new Exception(sb.ToString());
+            return Result<RegisterUserResponseDto>.Failure(new Error("UserRegistrationFailed",sb.ToString()));
         }
         await _userManager.AddToRoleAsync(user, Role.Member.ToString());
-        return new(true, "User is successfully created!");
+        return Result<RegisterUserResponseDto>.Success(new(true, "User is successfully created!"));
     }
 
 
-    public async Task<TokenResponseDto> Login(LoginDto loginDto)
+    public async Task<Result<TokenResponseDto>> Login(LoginDto loginDto)
     {
         AppUser user = await _userManager.FindByNameAsync(loginDto.UserNameOrEmail);
         if (user is null)
         {
             user = await _userManager.FindByEmailAsync(loginDto.UserNameOrEmail);
-            if (user is null) throw new Exception("Username/Email or password is incorrect");
+            if (user is null) return UserErrors.UserNotFound;
         }
-        if (!await _userManager.CheckPasswordAsync(user, loginDto.Password)) throw new Exception("Username/Email or password is incorrect");
+        if (!await _userManager.CheckPasswordAsync(user, loginDto.Password)) return UserErrors.UserLoginFailed;
         await _userManager.GetRolesAsync(user);
         TokenResponseDto tokenDto = await _createTokenDto(user, await _createClaims(user));
-        return tokenDto;
+        return Result<TokenResponseDto>.Success(tokenDto);
     }
 
 
-    public async Task<TokenResponseDto> LoginByRefreshToken(string refresh)
+    public async Task<Result<TokenResponseDto>> LoginByRefreshToken(string refresh)
     {
         AppUser user = await _userManager.Users.FirstOrDefaultAsync(u => u.RefreshToken == refresh);
-        if (user is null) throw new Exception("User not found!");
-        if (user.RefreshTokenExpiredAt < DateTime.UtcNow) throw new Exception("Your token expired");
+        if (user is null) return UserErrors.UserNotFound;
+        if (user.RefreshTokenExpiredAt < DateTime.UtcNow) return UserErrors.UserRefreshTokenExpiration;
         TokenResponseDto tokenDto = await _createTokenDto(user, await _createClaims(user));
-        return tokenDto;
+        return Result<TokenResponseDto>.Success(tokenDto);
     }
 
     private async Task<TokenResponseDto> _createTokenDto(AppUser user, ICollection<Claim> userClaims)

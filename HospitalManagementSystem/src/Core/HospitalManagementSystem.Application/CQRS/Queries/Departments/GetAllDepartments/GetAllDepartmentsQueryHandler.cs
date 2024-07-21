@@ -9,6 +9,7 @@ public class GetAllDepartmentsQueryHandler : IRequestHandler<GetAllDepartmentsQu
         _departmentService = departmentService;
         _mapper = mapper;
     }
+
     public async Task<GetAllDepartmentsQueryResponse> Handle(GetAllDepartmentsQueryRequest request, CancellationToken cancellationToken)
     {
         var departmentDtos = await _departmentService.GetAllAsync();

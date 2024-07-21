@@ -27,11 +27,9 @@ public class DepartmentsController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> GetById(string id)
     {
-        var response = await _mediator.Send(new GetDepartmentByIdQueryRequest
-        {
-            Id = id
-        });
-        return Ok(response.Department);
+        var result = await _mediator.Send(new GetDepartmentByIdQueryRequest{ Id = id });
+        if(result.IsFailure) return NotFound(new {result.Error.Code, result.Error.Description});
+        return Ok(result.Value.Department);
     }
 
     [HttpPost("")]

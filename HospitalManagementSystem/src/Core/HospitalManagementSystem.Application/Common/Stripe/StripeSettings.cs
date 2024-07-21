@@ -1,4 +1,4 @@
-﻿namespace HospitalManagementSystem.Application.Stripe;
+﻿namespace HospitalManagementSystem.Application.Common.Stripe;
 
 public class StripeSettings
 {

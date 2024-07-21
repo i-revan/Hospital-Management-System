@@ -1,4 +1,4 @@
-﻿namespace HospitalManagementSystem.Application.Email;
+﻿namespace HospitalManagementSystem.Application.Common.Email;
 
 public class EmailSettings
 {

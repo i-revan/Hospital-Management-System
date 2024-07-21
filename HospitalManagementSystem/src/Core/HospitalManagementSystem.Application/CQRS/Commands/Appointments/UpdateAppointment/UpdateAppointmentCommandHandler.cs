@@ -15,11 +15,11 @@ public class UpdateAppointmentCommandHandler : IRequestHandler<UpdateAppointment
     public async Task<UpdateAppointmentCommandResponse> Handle(UpdateAppointmentCommandRequest request, CancellationToken cancellationToken)
     {
         var appointmentDto = _mapper.Map<AppointmentUpdateDto>(request);
-        bool result = await _appointmentService.UpdateAppointmentAsync(request.Id, appointmentDto);
+        var result = await _appointmentService.UpdateAppointmentAsync(request.Id, appointmentDto);
         return new UpdateAppointmentCommandResponse
         {
-            StatusCode = result ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
-            Message = result ? "Appointment is successfully updated!" : "Error occured"
+            StatusCode = result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
+            Message = result.IsSuccess ? "Appointment is successfully updated!" : result.Error.Description
         };
         throw new NotImplementedException();
     }

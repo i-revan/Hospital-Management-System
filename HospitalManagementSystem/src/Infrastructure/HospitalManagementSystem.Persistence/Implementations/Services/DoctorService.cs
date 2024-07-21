@@ -1,4 +1,5 @@
-﻿using HospitalManagementSystem.Application.DTOs.Doctors;
+﻿using HospitalManagementSystem.Application.Common.Errors;
+using HospitalManagementSystem.Application.DTOs.Doctors;
 
 namespace HospitalManagementSystem.Persistence.Implementations.Services;
 public class DoctorService : IDoctorService
@@ -24,63 +25,69 @@ public class DoctorService : IDoctorService
         });
     }
 
-    public async Task<DoctorItemDto> GetByIdAsync(string id)
+    public async Task<Result<DoctorItemDto>> GetByIdAsync(string id)
     {
-        ArgumentNullException.ThrowIfNull(id);
+        if (id is null) return Result<DoctorItemDto>.Failure(CommonErrors.InvalidId);
         return await _cacheService.GetOrCreateAsync($"{_cacheKey}_{id}", async () =>
         {
             Doctor doctor = await _unitOfWork.DoctorReadRepository.GetByIdAsync(id, includes: "Department");
-            if (doctor is null) throw new Exception("No associated doctor found!");
-            return _mapper.Map<DoctorItemDto>(doctor);
+            if (doctor is null) return DoctorErrors.DoctorNotFound;
+            return Result<DoctorItemDto>.Success(_mapper.Map<DoctorItemDto>(doctor));
         });
     }
 
-    public async Task<bool> CreateDoctorAsync(DoctorCreateDto dto)
+    public async Task<Result<bool>> CreateDoctorAsync(DoctorCreateDto dto)
     {
-        bool isExist = await _unitOfWork.DoctorReadRepository.IsExistsAsync(d => d.Name.ToLower().Trim() == dto.Name.ToLower().Trim() && !d.IsDeleted);
-        if (isExist) throw new Exception("This doctor already exists");
+        //bool isExist = await _unitOfWork.DoctorReadRepository.IsExistsAsync(d => d.Name.ToLower().Trim() == dto.Name.ToLower().Trim() && !d.IsDeleted);
+        //if (isExist) return Result<bool>.Failure(DoctorErrors.DoctorAlreadyExist);
         bool isDepartmentExist = await _unitOfWork.DepartmentReadRepository.IsExistsAsync(d => d.Id == dto.DepartmentId);
-        if (!isDepartmentExist) throw new Exception("Selected department does not exist!");
+        if (!isDepartmentExist) return DoctorErrors.DoctorDepartmentDoesNotExist;
         bool result = await _unitOfWork.DoctorWriteRepository.AddAsync(_mapper.Map<Doctor>(dto));
+        if (!result) return DoctorErrors.DoctorCreationFailed;
         await _unitOfWork.SaveChangesAsync();
-        if (result) _cacheService.Remove(_cacheKey);
-        return result;
+        _cacheService.Remove(_cacheKey);
+        return Result<bool>.Success(true);
     }
 
-    public async Task<bool> UpdateDoctorAsync(string id, DoctorUpdateDto dto)
+    public async Task<Result<bool>> UpdateDoctorAsync(string id, DoctorUpdateDto dto)
     {
-        ArgumentNullException.ThrowIfNull(id);
+        if (string.IsNullOrEmpty(id)) return CommonErrors.InvalidId;
         Doctor doctor = await _unitOfWork.DoctorReadRepository.GetByIdAsync(id);
-        if (doctor is null) throw new Exception("No associated doctor found!");
-        bool isExist = await _unitOfWork.DoctorReadRepository.IsExistsAsync(d => d.Name.ToLower().Trim() == dto.Name.ToLower().Trim() && !d.IsDeleted);
-        if (isExist) throw new Exception("This doctor already exists");
+        if (doctor is null) return DoctorErrors.DoctorNotFound;
+        //bool isExist = await _unitOfWork.DoctorReadRepository.IsExistsAsync(d => d.Name.ToLower().Trim() == dto.Name.ToLower().Trim() && !d.IsDeleted);
+        //if (isExist) return Result<bool>.Failure(DoctorErrors.DoctorAlreadyExist);
+        bool isDepartmentExist = await _unitOfWork.DepartmentReadRepository.IsExistsAsync(d => d.Id == dto.DepartmentId);
+        if (!isDepartmentExist) return DoctorErrors.DoctorDepartmentDoesNotExist;
         _mapper.Map(dto, doctor);
         bool result = _unitOfWork.DoctorWriteRepository.Update(doctor);
+        if (!result) return DoctorErrors.DoctorUpdatingFailed;
         await _unitOfWork.SaveChangesAsync();
         _clearCache(id, result);
-        return result;
+        return Result<bool>.Success(true);
     }
 
-    public async Task<bool> SoftDeleteDoctorAsync(string id)
+    public async Task<Result<bool>> SoftDeleteDoctorAsync(string id)
     {
-        ArgumentNullException.ThrowIfNull(id);
+        if (string.IsNullOrEmpty(id)) return CommonErrors.InvalidId;
         Doctor doctor = await _unitOfWork.DoctorReadRepository.GetByIdAsync(id, isTracking: true);
-        if (doctor is null) throw new Exception("No associated doctor found!");
+        if (doctor is null) return DoctorErrors.DoctorNotFound;
         bool result = _unitOfWork.DoctorWriteRepository.SoftDelete(doctor);
+        if (!result) return DoctorErrors.DoctorDeletingFailed;
         await _unitOfWork.SaveChangesAsync();
         _clearCache(id, result);
-        return result;
+        return Result<bool>.Success(true);
     }
 
-    public async Task<bool> DeleteDoctorAsync(string id)
+    public async Task<Result<bool>> DeleteDoctorAsync(string id)
     {
-        ArgumentNullException.ThrowIfNull(id);
+        if (string.IsNullOrEmpty(id)) return CommonErrors.InvalidId;
         Doctor doctor = await _unitOfWork.DoctorReadRepository.GetByIdAsync(id);
-        if (doctor is null) throw new Exception("No associated doctor found!");
+        if (doctor is null) return DoctorErrors.DoctorNotFound;
         bool result = _unitOfWork.DoctorWriteRepository.Delete(doctor);
+        if (!result) return DoctorErrors.DoctorDeletingFailed;
         await _unitOfWork.SaveChangesAsync();
         _clearCache(id, result);
-        return result;
+        return Result<bool>.Success(true);
     }
 
     private void _clearCache(string id, bool result)

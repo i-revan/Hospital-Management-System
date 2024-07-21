@@ -12,11 +12,11 @@ public class UpdateDoctorCommandHandler : IRequestHandler<UpdateDoctorCommandReq
     public async Task<UpdateDoctorCommandResponse> Handle(UpdateDoctorCommandRequest request, CancellationToken cancellationToken)
     {
         var doctorDto = _mapper.Map<DoctorUpdateDto>(request);
-        bool result = await _doctorService.UpdateDoctorAsync(request.Id,doctorDto);
+        var result = await _doctorService.UpdateDoctorAsync(request.Id,doctorDto);
         return new UpdateDoctorCommandResponse
         {
-            StatusCode = result ? HttpStatusCode.OK : System.Net.HttpStatusCode.BadRequest,
-            Message = result ? "Doctor is successfully updated!" : "Error occured"
+            StatusCode = result.IsSuccess ? HttpStatusCode.OK : System.Net.HttpStatusCode.BadRequest,
+            Message = result.IsSuccess ? "Doctor is successfully updated!" : result.Error.Description
         };
     }
 }

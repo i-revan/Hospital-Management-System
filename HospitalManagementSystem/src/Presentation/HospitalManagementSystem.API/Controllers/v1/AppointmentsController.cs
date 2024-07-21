@@ -1,4 +1,5 @@
-﻿using HospitalManagementSystem.Application.CQRS.Commands.Appointments.CancelAppoinment;
+﻿using HospitalManagementSystem.Application.Common.Results;
+using HospitalManagementSystem.Application.CQRS.Commands.Appointments.CancelAppoinment;
 using HospitalManagementSystem.Application.CQRS.Commands.Appointments.ScheduleAppointment;
 using HospitalManagementSystem.Application.CQRS.Commands.Appointments.UpdateAppointment;
 using HospitalManagementSystem.Application.CQRS.Queries.Appointments.GetAllAppointments;
@@ -29,7 +30,8 @@ public class AppointmentsController : ControllerBase
     public async Task<IActionResult> GetById(string id)
     {
         var response = await _mediator.Send(new GetAppointmentByIdQueryRequest(id));
-        return Ok(response.Appointment);
+        if (response.IsFailure) return NotFound(new { response.Error.Code, response.Error.Description });
+        return Ok(response.Value.Appointment);
     }
 
     [HttpPost]

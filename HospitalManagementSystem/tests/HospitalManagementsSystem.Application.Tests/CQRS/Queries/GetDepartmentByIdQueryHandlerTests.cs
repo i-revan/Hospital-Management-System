@@ -1,5 +1,4 @@
-﻿using FluentAssertions.Equivalency;
-using HospitalManagementSystem.Application.Abstraction.Services;
+﻿using HospitalManagementSystem.Application.Abstraction.Services;
 using HospitalManagementSystem.Application.CQRS.Queries.Departments.GetDepartmentById;
 using HospitalManagementSystem.Application.DTOs.Departments;
 using HospitalManagementSystem.Domain.Entities;
@@ -32,16 +31,17 @@ public class GetDepartmentByIdQueryHandlerTests
         var expectedResponse = new GetDepartmentByIdQueryResponse(new DepartmentItemDto { 
             Id = departmentId.ToString(), Name = "DepartmentTest", Doctors = doctors });
 
-        _departmentService.Setup(s => s.GetByIdAsync(departmentId.ToString())).ReturnsAsync(departmentDto);
+        _departmentService.Setup(s => s.GetByIdAsync(departmentId.ToString()))
+            .ReturnsAsync(Result<DepartmentItemDto>.Success(departmentDto));
         _mapperMock.Setup(m => m.Map<GetDepartmentByIdQueryResponse>(departmentDto)).Returns(expectedResponse);
 
         var request = new GetDepartmentByIdQueryRequest { Id = departmentId.ToString() };
 
         var response = await _handler.Handle(request, It.IsAny<CancellationToken>());
 
-        Assert.NotNull(response);
-        Assert.Equal(expectedResponse.Department.Id, response.Department.Id);
-        Assert.Equal(expectedResponse.Department.Name, response.Department.Name);
+        Assert.NotNull(response.Value);
+        Assert.Equal(expectedResponse.Department.Id, response.Value.Department.Id);
+        Assert.Equal(expectedResponse.Department.Name, response.Value.Department.Name);
     }
 
     [Fact]
@@ -50,12 +50,13 @@ public class GetDepartmentByIdQueryHandlerTests
         var departmentId = Guid.NewGuid();
         DepartmentItemDto nullDepartment = null; // Simulate null department
 
-        _departmentService.Setup(s => s.GetByIdAsync(departmentId.ToString())).ReturnsAsync(nullDepartment);
+        _departmentService.Setup(s => s.GetByIdAsync(departmentId.ToString()))
+            .ReturnsAsync(Result<DepartmentItemDto>.Success(nullDepartment));
 
         var request = new GetDepartmentByIdQueryRequest { Id = departmentId.ToString() };
 
         var response = await _handler.Handle(request, It.IsAny<CancellationToken>());
 
-        Assert.Null(response);
+        Assert.Null(response.Value);
     }
 }

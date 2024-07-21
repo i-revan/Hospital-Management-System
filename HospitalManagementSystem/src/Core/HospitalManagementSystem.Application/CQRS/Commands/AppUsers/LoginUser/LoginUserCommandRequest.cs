@@ -2,4 +2,4 @@
 public record LoginUserCommandRequest(
     string UserNameOrEmail,
     string Password
-    ) : IRequest<LoginUserCommandResponse>;
+    ) : IRequest<Result<LoginUserCommandResponse>>;

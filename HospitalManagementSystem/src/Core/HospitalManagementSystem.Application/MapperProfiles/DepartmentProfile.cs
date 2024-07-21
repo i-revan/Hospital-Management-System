@@ -1,5 +1,7 @@
-﻿using HospitalManagementSystem.Application.CQRS.Commands.Departments.CreateDepartment;
+﻿using HospitalManagementSystem.Application.Common.Results;
+using HospitalManagementSystem.Application.CQRS.Commands.Departments.CreateDepartment;
 using HospitalManagementSystem.Application.CQRS.Commands.Departments.UpdateDepartment;
+using HospitalManagementSystem.Application.CQRS.Queries.Departments.GetDepartmentById;
 
 namespace HospitalManagementSystem.Application.MapperProfiles;
 internal class DepartmentProfile : Profile

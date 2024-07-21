@@ -1,3 +1,3 @@
 ﻿namespace HospitalManagementSystem.Application.CQRS.Queries.Appointments.GetAppointmentById;
 
-public record GetAppointmentByIdQueryRequest(string Id) : IRequest<GetAppointmentByIdQueryResponse>;
+public record GetAppointmentByIdQueryRequest(string Id) : IRequest<Result<GetAppointmentByIdQueryResponse>>;

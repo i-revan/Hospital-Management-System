@@ -1,4 +1,5 @@
 ﻿using HospitalManagementSystem.Application.Abstraction.Services;
+using HospitalManagementSystem.Application.Common.Errors;
 using HospitalManagementSystem.Application.CQRS.Commands.Departments.DeleteDepartment;
 
 namespace HospitalManagementsSystem.Application.Tests.CQRS.Commands;
@@ -18,7 +19,8 @@ public class DeleteDepartmentCommandHandlerTests
     public async Task Handle_ShouldReturnOk_WhenDepartmentIsDeletedSuccessfully()
     {
         var request = new DeleteDepartmentCommandRequest { Id = Guid.NewGuid().ToString() };
-        _departmentService.Setup(ds => ds.SoftDeleteDepartmentAsync(request.Id)).ReturnsAsync(true);
+        _departmentService.Setup(ds => ds.SoftDeleteDepartmentAsync(request.Id))
+            .ReturnsAsync(Result<bool>.Success(true));
 
         var response = await _handler.Handle(request, It.IsAny<CancellationToken>());
 
@@ -29,7 +31,8 @@ public class DeleteDepartmentCommandHandlerTests
     public async Task Handle_ShouldReturnOk_WhenDepartmentDeletingFails()
     {
         var request = new DeleteDepartmentCommandRequest { Id = Guid.NewGuid().ToString() };
-        _departmentService.Setup(ds => ds.SoftDeleteDepartmentAsync(request.Id)).ReturnsAsync(false);
+        _departmentService.Setup(ds => ds.SoftDeleteDepartmentAsync(request.Id))
+            .ReturnsAsync(Result<bool>.Failure(DepartmentErrors.DepartmentDeletingFailed));
 
         var response = await _handler.Handle(request, It.IsAny<CancellationToken>());
 
@@ -40,7 +43,8 @@ public class DeleteDepartmentCommandHandlerTests
     public async Task DeleteDepartment_CallsServiceOnce()
     {
         var request = new DeleteDepartmentCommandRequest { Id = Guid.NewGuid().ToString() };
-        _departmentService.Setup(ds => ds.SoftDeleteDepartmentAsync(request.Id)).ReturnsAsync(true);
+        _departmentService.Setup(ds => ds.SoftDeleteDepartmentAsync(request.Id))
+            .ReturnsAsync(Result<bool>.Success(true));
 
         await _handler.Handle(request, It.IsAny<CancellationToken>());
 

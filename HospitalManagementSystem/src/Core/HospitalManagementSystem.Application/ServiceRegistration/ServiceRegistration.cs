@@ -1,6 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
 using HospitalManagementSystem.Application.Behaviors;
-using HospitalManagementSystem.Application.Stripe;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 

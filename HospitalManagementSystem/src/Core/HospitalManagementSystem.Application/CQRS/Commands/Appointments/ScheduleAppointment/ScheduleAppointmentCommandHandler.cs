@@ -16,11 +16,11 @@ public class ScheduleAppointmentCommandHandler : IRequestHandler<ScheduleAppoint
     public async Task<ScheduleAppointmentCommandResponse> Handle(ScheduleAppointmentCommandRequest request, CancellationToken cancellationToken)
     {
         var appointmentDto = _mapper.Map<ScheduleAppointmentDto>(request);
-        bool result = await _appointmentService.ScheduleAppointmentAsync(appointmentDto);
+        var result = await _appointmentService.ScheduleAppointmentAsync(appointmentDto);
         return new ScheduleAppointmentCommandResponse
         {
-            StatusCode = result ? HttpStatusCode.Created : HttpStatusCode.BadRequest,
-            Message = result ? "Appointment is successfully added!" : "Error occured"
+            StatusCode = result.IsSuccess ? HttpStatusCode.Created : HttpStatusCode.BadRequest,
+            Message = result.IsSuccess ? "Appointment is successfully added!" : result.Error.Description
         };
     }
 }

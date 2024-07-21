@@ -1,6 +1,6 @@
 ﻿using HospitalManagementSystem.Application;
 using HospitalManagementSystem.Application.Abstraction.Services.Stripe;
-using HospitalManagementSystem.Application.Stripe;
+using HospitalManagementSystem.Application.Common.Stripe;
 using HospitalManagementSystem.Domain.Entities;
 using HospitalManagementSystem.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Http;

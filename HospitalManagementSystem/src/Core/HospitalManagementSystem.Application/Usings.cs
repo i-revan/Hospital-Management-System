@@ -10,8 +10,4 @@ global using HospitalManagementSystem.Domain.Entities;
 global using HospitalManagementSystem.Domain.Entities.Common;
 global using HospitalManagementSystem.Application.DTOs.Users;
 global using System.Net;
-
-
-
-
-
+global using HospitalManagementSystem.Application.Common.Results;
