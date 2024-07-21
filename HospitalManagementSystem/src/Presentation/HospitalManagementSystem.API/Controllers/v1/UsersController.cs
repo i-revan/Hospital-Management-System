@@ -21,12 +21,20 @@ public class UsersController : ControllerBase
         var response = await _mediator.Send(request);
         return StatusCode((int) response.StatusCode, response);
     }
+
+
+
     [HttpPost("[Action]")]
     public async Task<IActionResult> Login([FromForm] LoginUserCommandRequest request)
     {
         var response = await _mediator.Send(request);
-        if (response.IsSuccess) return StatusCode(StatusCodes.Status200OK, response.Value);
-        return StatusCode((int) HttpStatusCode.BadRequest, response.Error);
+        return response.IsSuccess ? Ok(response.Value) : Problem(
+            statusCode: StatusCodes.Status400BadRequest,
+            title: "Bad Request",
+            type: "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+            detail: response.Error.Code + " : " + response.Error.Description);
+        //if (response.IsSuccess) return StatusCode(StatusCodes.Status200OK, response.Value);
+        //return StatusCode((int) HttpStatusCode.BadRequest, response.Error);
     }
     [HttpPost("[Action]")]
     public async Task<IActionResult> LoginByRefresh([FromForm] LoginByRefreshCommandRequest request)

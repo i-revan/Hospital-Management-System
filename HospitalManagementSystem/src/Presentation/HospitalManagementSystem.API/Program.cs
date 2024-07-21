@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using HospitalManagementSystem.Persistence.Contexts;
 using Serilog;
 using HospitalManagementSystem.Quartz.ServiceRegistration;
+using HospitalManagementSystem.API.Middleware;
 
 internal class Program
 {
@@ -84,6 +85,8 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
+
         app.UseAuthentication();
         app.UseAuthorization();
 
