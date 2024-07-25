@@ -7,6 +7,10 @@ using HospitalManagementSystem.Infrastructure.Implementations.Services;
 using HospitalManagementSystem.Application.Common.Email;
 using HospitalManagementSystem.Application.Common.Stripe;
 using HospitalManagementSystem.Persistence.Implementations.Services;
+using HospitalManagementSystem.Application.Abstraction.Services.Storage;
+using HospitalManagementSystem.Infrastructure.Implementations.Services.Storage;
+using Microsoft.Extensions.Azure;
+using Azure.Storage.Blobs;
 
 namespace HospitalManagementSystem.Infrastructure.ServiceRegistration;
 public static class ServiceRegistration
@@ -40,6 +44,9 @@ public static class ServiceRegistration
         services.AddScoped<IStripeService, StripeService>();
         services.AddScoped<IPaymentService, PaymentService>();
         services.AddSingleton<ICacheService, MemoryCacheService>();
+
+        services.AddSingleton<IBlobService, BlobService>();
+        services.AddSingleton(_ => new BlobServiceClient(configuration.GetConnectionString("BlobStorage")));
 
         services.Configure<EmailSettings>(configuration.GetSection("Email"));
         services.AddScoped<IEmailService, EmailService>();

@@ -64,7 +64,9 @@ internal class Program
 
         builder.Host.UseSerilog((context, configuration) =>
             configuration.ReadFrom.Configuration(context.Configuration));
-
+        builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
+                policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
+                ));
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -85,7 +87,9 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
-        app.UseMiddleware<ExceptionHandlingMiddleware>();
+        //app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+        app.UseCors();
 
         app.UseAuthentication();
         app.UseAuthorization();

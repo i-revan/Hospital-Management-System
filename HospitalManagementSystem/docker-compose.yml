@@ -25,6 +25,15 @@ services:
       - SA_PASSWORD=password@12345#
     volumes:
       - dbdata:/var/opt/mssql
+
+  hospitalmanagementsystem-blob-storage:
+    image: mcr.microsoft.com/azure-storage/azurite:latest
+    container_name: hospitalmanagementsystem.blob-storage
+    volumes:
+      - ./.containers/blob-storage/data:/data
+    ports:
+      - "10000:10000"
+    command: "azurite-blob --blobHost 0.0.0.0 -l /data"
 volumes:
   dbdata:
 

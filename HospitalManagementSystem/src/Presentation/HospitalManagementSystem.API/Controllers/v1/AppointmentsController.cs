@@ -1,5 +1,4 @@
-﻿using HospitalManagementSystem.Application.Common.Results;
-using HospitalManagementSystem.Application.CQRS.Commands.Appointments.CancelAppoinment;
+﻿using HospitalManagementSystem.Application.CQRS.Commands.Appointments.CancelAppoinment;
 using HospitalManagementSystem.Application.CQRS.Commands.Appointments.ScheduleAppointment;
 using HospitalManagementSystem.Application.CQRS.Commands.Appointments.UpdateAppointment;
 using HospitalManagementSystem.Application.CQRS.Queries.Appointments.GetAllAppointments;
