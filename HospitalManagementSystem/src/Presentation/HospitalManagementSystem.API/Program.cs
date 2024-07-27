@@ -6,6 +6,10 @@ using HospitalManagementSystem.Persistence.Contexts;
 using Serilog;
 using HospitalManagementSystem.Quartz.ServiceRegistration;
 using HospitalManagementSystem.API.Middleware;
+using HospitalManagementSystem.Application.Abstraction.EventBus;
+using HospitalManagementSystem.Infrastructure.MessageBroker;
+using MassTransit;
+using HospitalManagementSystem.Application.CQRS.Commands.Appointments.ScheduleAppointment;
 
 internal class Program
 {
@@ -66,7 +70,27 @@ internal class Program
             configuration.ReadFrom.Configuration(context.Configuration));
         builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
                 policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
-                ));
+        ));
+
+        builder.Services.AddMassTransit(busConfigurator =>
+        {
+            busConfigurator.SetKebabCaseEndpointNameFormatter();
+
+            busConfigurator.AddConsumer<AppointmentScheduledEventConsumer>();
+
+            busConfigurator.UsingRabbitMq((context, configurator) =>
+            {
+                MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
+
+                configurator.Host(new Uri(settings.Host), h =>
+                {
+                    h.Username(settings.Username);
+                    h.Password(settings.Password);
+                });
+            });
+        });
+        builder.Services.AddTransient<IEventBus, EventBus>();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -87,7 +111,7 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
-        //app.UseMiddleware<ExceptionHandlingMiddleware>();
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
 
         app.UseCors();
 

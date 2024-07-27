@@ -9,8 +9,12 @@ using HospitalManagementSystem.Application.Common.Stripe;
 using HospitalManagementSystem.Persistence.Implementations.Services;
 using HospitalManagementSystem.Application.Abstraction.Services.Storage;
 using HospitalManagementSystem.Infrastructure.Implementations.Services.Storage;
-using Microsoft.Extensions.Azure;
 using Azure.Storage.Blobs;
+using HospitalManagementSystem.Infrastructure.MessageBroker;
+using Microsoft.Extensions.Options;
+using MassTransit;
+using HospitalManagementSystem.Application.Abstraction.EventBus;
+using HospitalManagementSystem.Application.CQRS.Commands.Appointments.ScheduleAppointment;
 
 namespace HospitalManagementSystem.Infrastructure.ServiceRegistration;
 public static class ServiceRegistration
@@ -47,6 +51,10 @@ public static class ServiceRegistration
 
         services.AddSingleton<IBlobService, BlobService>();
         services.AddSingleton(_ => new BlobServiceClient(configuration.GetConnectionString("BlobStorage")));
+
+        services.Configure<MessageBrokerSettings>(
+            configuration.GetSection("MessageBroker"));
+        services.AddSingleton(sp => sp.GetRequiredService<IOptions<MessageBrokerSettings>>().Value);
 
         services.Configure<EmailSettings>(configuration.GetSection("Email"));
         services.AddScoped<IEmailService, EmailService>();

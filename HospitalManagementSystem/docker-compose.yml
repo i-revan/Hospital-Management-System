@@ -34,6 +34,17 @@ services:
     ports:
       - "10000:10000"
     command: "azurite-blob --blobHost 0.0.0.0 -l /data"
+
+  hospitalmanagementsystem-mq:
+    image: rabbitmq:3.11.7-management
+    container_name: Queque
+    hostname: hospitalmanagementsystem-queque
+    volumes:
+       - ./.containers/queque/data/:/var/lib/rabbitmq
+       - ./.containers/queque/log/:/var/log/rabbitmq
+    environment:
+        RABBITMQ_DEFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
 volumes:
   dbdata:
 
