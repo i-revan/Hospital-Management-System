@@ -12,9 +12,6 @@ using HospitalManagementSystem.Infrastructure.Implementations.Services.Storage;
 using Azure.Storage.Blobs;
 using HospitalManagementSystem.Infrastructure.MessageBroker;
 using Microsoft.Extensions.Options;
-using MassTransit;
-using HospitalManagementSystem.Application.Abstraction.EventBus;
-using HospitalManagementSystem.Application.CQRS.Commands.Appointments.ScheduleAppointment;
 
 namespace HospitalManagementSystem.Infrastructure.ServiceRegistration;
 public static class ServiceRegistration

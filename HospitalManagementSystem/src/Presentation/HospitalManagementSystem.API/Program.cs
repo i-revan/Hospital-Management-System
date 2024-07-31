@@ -10,6 +10,7 @@ using HospitalManagementSystem.Application.Abstraction.EventBus;
 using HospitalManagementSystem.Infrastructure.MessageBroker;
 using MassTransit;
 using HospitalManagementSystem.Application.CQRS.Commands.Appointments.ScheduleAppointment;
+using HospitalManagementSystem.Infrastructure.SignalR;
 
 internal class Program
 {
@@ -68,6 +69,7 @@ internal class Program
 
         builder.Host.UseSerilog((context, configuration) =>
             configuration.ReadFrom.Configuration(context.Configuration));
+
         builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
                 policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
         ));
@@ -90,6 +92,10 @@ internal class Program
             });
         });
         builder.Services.AddTransient<IEventBus, EventBus>();
+        builder.Services.AddSignalR(opt =>
+        {
+            opt.EnableDetailedErrors = true;
+        });
 
         var app = builder.Build();
 
@@ -112,6 +118,8 @@ internal class Program
 
         app.UseHttpsRedirection();
         app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+        app.MapHub<ChatHub>("chat-hub");
 
         app.UseCors();
 
